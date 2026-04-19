@@ -1,4 +1,6 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/mrb/browser",
   "rewrites": [
     {
       "source": "/api/(.*)",
