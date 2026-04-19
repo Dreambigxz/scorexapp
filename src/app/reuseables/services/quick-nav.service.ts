@@ -37,8 +37,6 @@ export class QuickNavService {
 
   go(url: string, queryParams?: any): void {
 
-    console.log({url});
-
    this.router.navigate([url], { queryParams });
   }
 
@@ -46,7 +44,7 @@ export class QuickNavService {
     this.toast.show({message,status})
   }
 
-  copy(item:any){
+  copy(item:any, message:any="Data copied"){
     copyContent(this.toast,item)
   }
 

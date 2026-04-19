@@ -1,0 +1,144 @@
+.balance-card {
+  background: linear-gradient(
+    145deg,
+    rgba(1,7,33,0.95),
+    rgba(1,7,33,0.7)
+  );
+
+  border-radius: 20px;
+  padding: 20px;
+  color: #ffffff;
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* TOP */
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* TITLE */
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.icon {
+  margin-right: 6px;
+}
+
+/* ACTIONS GRID */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+/* BUTTON BASE */
+.actions button {
+  height: 34px;
+  width: 100%;
+
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* DEPOSIT */
+.deposit {
+  background: linear-gradient(135deg,#0095FF,#00c6ff);
+  color: #fff;
+  border: none;
+}
+
+.deposit:hover {
+  box-shadow: 0 4px 15px rgba(0,149,255,0.4);
+}
+
+/* WITHDRAW */
+.withdraw {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,190,27,0.4);
+  color: #ffbe1b;
+}
+
+.withdraw:hover {
+  background: rgba(255,190,27,0.1);
+}
+
+/* AMOUNT */
+.amount-row {
+  margin-top: 18px;
+}
+
+.amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffbe1b;
+}
+
+/* BOTTOM */
+.bottom-row {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* INFO */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* LABEL */
+.label {
+  font-size: .844rem !important;
+  color: #94a3b8;
+}
+
+/* VALUE */
+.value {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+
+  .top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .amount {
+    font-size: 22px;
+  }
+
+  .label {
+    font-size: 10px;
+  }
+
+  .amount-row {
+    margin-bottom: 10px;
+  }
+}

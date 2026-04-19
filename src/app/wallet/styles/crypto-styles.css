@@ -1,0 +1,192 @@
+/* NETWORK ROW */
+.network-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+/* OPTION */
+.network-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #94a3b8;
+  position: relative;
+  transition: 0.25s;
+}
+
+/* HIDE RADIO */
+.network-option input {
+  display: none;
+}
+
+/* RADIO */
+.custom-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  position: relative;
+  transition: 0.25s;
+}
+
+/* ACTIVE */
+.network-option input:checked + .custom-radio {
+  background: #ffbe1b;
+  border-color: #ffbe1b;
+}
+
+/* INNER DOT */
+.network-option input:checked + .custom-radio::after {
+  content: "";
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  background: #000;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ACTIVE TEXT */
+.network-option input:checked ~ span {
+  color: #ffbe1b;
+}
+
+/* ICON */
+img.crypto-img {
+  width: 36px;
+  border-radius: 10px;
+  transition: 0.25s;
+}
+
+/* QR */
+.qr-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.qr-wrapper img {
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* WALLET */
+.wallet-address {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(255,255,255,0.05);
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+/* MIN TRANSFER */
+.min-transfer {
+  background: linear-gradient(
+    135deg,
+    rgba(255,190,27,0.12),
+    rgba(1,7,33,0.9)
+  );
+
+  border: 1px solid rgba(255,190,27,0.25);
+
+  border-radius: 12px;
+  padding: 12px 14px;
+
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(255,190,27,0.12);
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.min-label {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* VALUE */
+.min-value {
+  font-size: 14px;
+  font-weight: 600;
+
+  background: linear-gradient(90deg, #ffbe1b, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* GLOW (SOFT GOLD) */
+.min-value {
+  animation: goldGlow 2s infinite alternate;
+}
+
+@keyframes goldGlow {
+  from {
+    text-shadow: 0 0 6px rgba(255,190,27,0.3);
+  }
+  to {
+    text-shadow: 0 0 14px rgba(255,190,27,0.6);
+  }
+}
+
+/* COPY BUTTON */
+.copy-btn {
+  background: linear-gradient(135deg,#0095FF,#ffbe1b);
+  color: #000;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.copy-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(0,149,255,0.3);
+}
+
+/* WARNING */
+.warning-text {
+  font-size: 12px;
+  color: #f87171;
+  line-height: 1.5;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .network-options {
+    gap: 12px;
+  }
+
+  img.crypto-img {
+    width: 30px;
+  }
+
+  .wallet-address {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

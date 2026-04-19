@@ -1,0 +1,15 @@
+<div class="set-pin">
+
+    <div class="apool__group">
+      <label for="pool1" class="apool__label">Enter Pin</label>
+      <input
+          [(ngModel)]="transactionPin"
+          type="number"
+          class="form__input"
+          placeholder="4 - 6 digit transaction pin"
+          >
+    </div>
+
+    <button (click)="createPin()" [disabled]="!transactionPin"  class="apool__btn"  type="submit" >Send</button>
+
+</div>

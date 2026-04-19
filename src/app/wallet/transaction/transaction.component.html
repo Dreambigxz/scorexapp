@@ -1,132 +1,96 @@
-<app-header2></app-header2>
-<app-spinner></app-spinner>
 
 
-<div class="page">
 
-  <section class="app-container">
+<div class="transactions-container ">
 
+  <!-- 🔹 Date Filter -->
+  <form [formGroup]="filterForm" class="filter-bar">
+    <div class="date-picker-container">
+     <mat-form-field appearance="outline" class="date-range-field">
+       <mat-label>Select Date Range</mat-label>
+       <mat-date-range-input [rangePicker]="picker" formGroupName="range">
+         <input matStartDate formControlName="start" placeholder="Start date">
+         <input matEndDate formControlName="stop" placeholder="End date">
+       </mat-date-range-input>
+       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+       <mat-date-range-picker #picker></mat-date-range-picker>
+     </mat-form-field>
 
-    <!-- <div *ngIf="quickNav.storeData.store['wallet']?.history as wh" class="summary-card mt-12 mb-12">
-        <div class="item-card">
-          <div class="item-row">
-            <span class="label">Total Deposit:</span>
-            <span class="value">{{ wh.deposit|currencyConverter:true }}</span>
-          </div>
-          <div class="item-row">
-            <span class="label">Total Withdrawn:</span>
-            <span class="value">{{ wh.withdraw|currencyConverter:true }}</span>
-          </div>
+     <button mat-raised- class="btn btn-md btn-outline-secondary filter-btn" (click)="filterByDate()">
+       <i class="ti ti-filter"></i>  Filter
+     </button>
+    </div>
+   </form>
+
+    <div *ngFor="let tx of storeData.store['transactions']" [ngClass]="tx.type" class="transaction-card" [class.pending]="tx.status === 'pending'" [class.completed]="tx.status=='success'" >
+      <div class="tx-header">
+        <div class="tx-type" [class.deposit]="tx.type === 'deposit'" [class.withdraw]="tx.type === 'withdraw'">
+          <!-- {{tx.sessionID}} -->
+          {{ tx.type | titlecase }}
         </div>
-    </div > -->
+        <div class="tx-status" [class.awaiting]="tx.status === 'awaiting'" [class.pending]="tx.status === 'pending'" [class.completed]="tx.status=='success'">
+          {{ tx.status | titlecase }}
+        </div>
+      </div>
 
-    <section class="wallet container-fluid ">
-
-      <div class="transactions-container ">
-
-        <!-- 🔹 Date Filter -->
-        <form [formGroup]="filterForm" class="filter-bar">
-          <div class="date-picker-container">
-           <mat-form-field appearance="outline" class="date-range-field">
-             <mat-label>Select Date Range</mat-label>
-             <mat-date-range-input [rangePicker]="picker" formGroupName="range">
-               <input matStartDate formControlName="start" placeholder="Start date">
-               <input matEndDate formControlName="stop" placeholder="End date">
-             </mat-date-range-input>
-             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-             <mat-date-range-picker #picker></mat-date-range-picker>
-           </mat-form-field>
-
-           <button mat-raised- class="btn btn-md btn-outline-secondary filter-btn" (click)="filterByDate()">
-             <i class="ti ti-filter"></i>  Filter
-           </button>
-          </div>
-         </form>
-
-          <div *ngFor="let tx of storeData.store['transactions']" [ngClass]="tx.type" class="transaction-card" [class.pending]="tx.status === 'pending'" [class.completed]="tx.status=='success'" >
-            <div class="tx-header">
-              <div class="tx-type" [class.deposit]="tx.type === 'deposit'" [class.withdraw]="tx.type === 'withdraw'">
-                <!-- {{tx.sessionID}} -->
-                {{ tx.type | titlecase }}
-              </div>
-              <div class="tx-status" [class.pending]="tx.status === 'pending'" [class.completed]="tx.status=='success'">
-                {{ tx.status | titlecase }}
-              </div>
-            </div>
-
-            <div class="tx-body">
-              <div class="tx-row">
-                <span class="text-first">Amount:</span>
-                <strong>{{ tx.amount | currencyConverter:true}} </strong>
-              </div>
-
-
-
-              <div  class="tra-details">
-              <!-- <div *ngIf="expandedTraId===tx.id" class="tra-details"> -->
-                <div class="tx-row">
-                  <span class="text-first">Charge:</span>
-                  <strong>{{ tx.processFee| currencyConverter:true }}</strong>
-                </div>
-
-                <!-- <div class="tx-row">
-                  <span class="text-first">Method:</span>
-                  <strong>{{ tx.method }}</strong>
-                </div> -->
-                <div class="tx-row">
-                  <span class="text-first">Balance before:</span>
-                  <strong>{{ tx.old_bal| currencyConverter:true }}</strong>
-                </div>
-
-                <div class="tx-row">
-                  <span class="text-first">Balance now:</span>
-                  <strong>{{ tx.new_bal| currencyConverter:true }}</strong>
-                </div>
-
-                <div class="tx-row">
-                  <span class="text-first">Txref:</span>
-                  <strong>{{ tx.sessionID || '—' }}</strong>
-                </div>
-                <div class="tx-row">
-                  <span class="text-first">Method:</span>
-                  <strong>{{ tx.method }}</strong>
-                </div>
-              </div>
-
-              <div class="tx-row">
-                <span class="text-first">Timestamp:</span>
-                <strong class="text-small">
-                  {{
-                    tx.type.includes('vip')
-                      ? (tx.created_at | date:'medium')
-                      : (tx.timestamp | date:'medium')
-                  }}
-                </strong>
-
-              </div>
-            </div>
-
-            <!-- <div class="tx-footer">
-              <button class="btn-sm btn-outline details-view-btn" (click)="viewDetails(tx)">
-                {{expandedTraId === tx.id ? "Close" : "View Details"}}
-              </button>
-            </div> -->
-          </div>
-
-          <div *ngIf="!storeData.store['transactions']?.length" class="empty-state">
-            <div class="no-data text-center">
-              <img
-                src="assets/images/empty-box.png"
-                width="60"
-                alt="no data"
-              />
-              <p>No transactions found.</p>
-            </div>
-          </div>
+      <div class="tx-body">
+        <div class="tx-row">
+          <span class="text-first">Amount:</span>
+          <strong>{{ tx.amount | currencyConverter:true}} </strong>
         </div>
 
 
-    </section>
 
-  </section>
-</div>
+        <div *ngIf="expandedTraId===tx.id" class="tra-details">
+          <div class="tx-row">
+            <span class="text-first">Fee:</span>
+            <strong>{{ tx.processFee| currencyConverter:true }}</strong>
+          </div>
+
+          <!-- <div class="tx-row">
+            <span class="text-first">Method:</span>
+            <strong>{{ tx.method }}</strong>
+          </div> -->
+          <div class="tx-row">
+            <span class="text-first">Old balance:</span>
+            <strong>{{ tx.old_bal| currencyConverter:true }}</strong>
+          </div>
+
+          <div class="tx-row">
+            <span class="text-first">New balance:</span>
+            <strong>{{ tx.new_bal| currencyConverter:true }}</strong>
+          </div>
+
+          <div class="tx-row">
+            <span class="text-first">ID:</span>
+            <strong>{{ tx.sessionID || '—' }}</strong>
+          </div>
+        </div>
+
+        <div class="tx-row">
+          <span class="text-first">Date:</span>
+          <strong class="text">
+            {{
+              tx.type.includes('vip')
+                ? (tx.created_at | date:'medium')
+                : (tx.timestamp | date:'medium')
+            }}
+          </strong>
+
+        </div>
+      </div>
+
+      <div class="tx-footer">
+        <button class="btn-sm btn-outline details-view-btn" (click)="viewDetails(tx)">
+          {{expandedTraId === tx.id ? "Close" : "View Details"}}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="!storeData.store['transactions']?.length" class="empty-state">
+      <div class="no-data text-center">
+        <img class="empty-icon" src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/database-off.svg">
+        <p>No transactions found.</p>
+      </div>
+    </div>
+  </div>

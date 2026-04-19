@@ -4,258 +4,215 @@
 
 <div *ngIf="quickNav.storeData.store['refDir'] as data" class="page page-wrapper">
 
-  <section class="app-container">
+  <section class="affiliate-page">
 
-    <div  class="affiliate-main-container">
-      <div class="affiliate-container">
+  <!-- TOP CARD -->
+  <div class="ref-card">
+    <div class="ref-info">
+      <span class="label">Referral Link</span>
+      <code>{{ refLink | truncateCenter:20 }}</code>
+    </div>
 
-            <!-- Referral Code -->
-            <div class="referral-code-card">
-            <p>Your Referral Code</p>
-            <!-- <div class="ref-code-row">
-              <h3>{{ data.RefCode }}</h3>
-              <button class="copy-btn" (click)="copyRefCode(data.RefCode)">Copy</button>
-            </div> -->
+    <button (click)="quickNav.copy(refLink)" class="copy">
+      Copy
+    </button>
+  </div>
 
-            <div class="wallet-address d-flex align-items-center justify-content-between">
-              <code>{{ refLink | truncateCenter:15}}</code>
-              <button (click)="quickNav.copy(refLink)" class="copy-btn btn btn-sm btn-outline-primary" >
-                <i class="ti ti-copy"></i> Copy
-              </button>
+  <!-- STATS GRID -->
+  <div class="stats-card">
+
+    <div class="top-row">
+      <div class="item">
+        <span>Total Earned</span>
+        <div class="">
+          {{ data.cashed_commissions | currencyConverter:true }}
+        </div>
+      </div>
+
+      <div class="item">
+        <span>Team Size</span>
+        <div class="circle green-border">
+          {{ data.active.generation_1 + data.active.generation_2 + data.active.generation_3 }}
+          <!-- {{data.total.generation_1 + data.total.generation_2 + data.total.generation_3}} /{{ data.active.generation_1 + data.active.generation_2 + data.active.generation_3 }} -->
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="bottom-row clickable"
+         (click)="quickNav.go('/promotions/inactive-users')">
+      <span>Inactive</span>
+      <div class="circle red-border small">
+        {{ data.total.generation_1 - data.active.generation_1 }}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAIN SWITCH -->
+  <div class="main-switch">
+    <button
+      [class.active]="activeTab==='earnings'"
+      (click)="activeTab='earnings'">
+      Earnings
+    </button>
+
+    <button
+      [class.active]="activeTab==='users'"
+      (click)="MainTablistener('users')">
+      Users
+    </button>
+  </div>
+
+  <!-- EARNINGS -->
+  <div *ngIf="activeTab==='earnings'" class="content">
+
+    <!-- SUB TABS -->
+    <div class="sub-tabs">
+      <span
+        *ngFor="let tab of tabs"
+        (click)="subEarningTab = tab"
+        [class.active]="subEarningTab === tab">
+        {{tab}}
+      </span>
+    </div>
+
+    <!-- GRID -->
+    <div class="card-grid">
+
+      <!-- REFERRAL -->
+      <ng-container *ngIf="subEarningTab==='Referral'">
+        <div class="card"
+          *ngFor="let percent of quickNav.storeData.store['refDir']?.settings.percent?.referral; let i=index">
+
+          <h5>Team {{i+1}}</h5>
+          <div class="details">
+            <div class="item-row">
+              <span class="label">Active users</span>
+              <span class="info">{{ data.referral['generation_' + (i+1)].count }}</span>
             </div>
+            <div class="item-row">
+              <span class="label">Earned</span>
+              <span class="info amount">{{ data.referral['generation_' + (i+1)].amount | currencyConverter:true }}</span>
             </div>
+          </div>
+          <!-- <p>Active users: {{ data.referral['generation_' + (i+1)].count }}</p>
+          <p class="amount">
+            {{ data.referral['generation_' + (i+1)].amount | currencyConverter:true }}
+          </p> -->
 
-            <!-- Totals Summary -->
-            <div class="summary-card">
-              <ul class="item-flex-list">
-                <!-- <li><span class="text-first">Today income:</span> <span class="text- text-yellow"> {{data.total_earning |currencyConverter:true}} </span></li> -->
-                <li><span class="text-first">Total earnings:</span> <span class=""> {{data.cashed_commissions |currencyConverter:true}} </span></li>
+        </div>
+      </ng-container>
 
-                <li><span class="text-first">Team Size:</span> <span class="text-deem">{{ data.total.generation_1 + data.total.generation_2 + data.total.generation_3 }}</span></li>
-                <!-- <li><span class="text-first">Total teams:</span> <span>{{ data.total.generation_1 + data.total.generation_2 + data.total.generation_3 }}</span></li> -->
-                <li><span class="text-first">Active team:</span><span class="text-success">{{ data.active.generation_1 + data.active.generation_2 + data.active.generation_3 }}</span></li>
-                <li (click)="quickNav.go('/promotions/inactive-users')">
-                  <span class="text-first  ">Inactive teams:</span>
-                  <div class="d-flex gap-4">
-                    <span class=" inactive- text-danger"> {{data.total.generation_1 - data.active.generation_1}}  </span>
-                    <i class="ti ti-arrow-right"></i>
-                  </div>
-                </li>
+      <!-- REBATE -->
+      <ng-container *ngIf="subEarningTab==='Rebate'">
+        <div class="card"
+          *ngFor="let percent of quickNav.storeData.store['refDir']?.settings.percent?.rebate; let i=index">
 
-              </ul>
-            </div>
+          <h5>Team {{i+1}}</h5>
+          <div class="item-row">
+            <span class="label">Earned</span>
+            <span class="info amount">{{ data.rebate['generation_' + (i+1)].amount | currencyConverter:true }}</span>
+          </div>
 
+        </div>
+      </ng-container>
 
-            <div class="tabs mb-10">
-              <ul class="tabs-nav">
-                <li
-                  (click)="activeTab = 'Earnings'"
-                  [class.tab-active]="activeTab === 'Earnings'"
-                >
-                  <a>Earnings</a>
-                </li>
-                <li
-                  [class.tab-active]="activeTab === 'Users'"
-                  (click)="MainTablistener('Users')"
-                >
-                  <a>Users</a>
-                </li>
-              </ul>
+      <!-- DEPOSIT -->
+      <ng-container *ngIf="subEarningTab==='Deposit'">
+        <div class="card" *ngFor="let gen of [1,2,3]">
 
-              <div  class="tabs-stage">
+          <h5 class="header">Team {{gen}}</h5>
+          <div class="item-row">
+            <span class="label">Amount</span>
+            <span class="info amount">{{ data.deposit['generation_' + gen].amount | currencyConverter:true }}</span>
+          </div>
 
-                  <div class="sub-earning-content" *ngIf="activeTab==='Earnings'">
-                      <!-- Tab earning Selector -->
-                      <div class="tab-selector mt-6">
-                        <div class="tabs-header d-flex align-items-center gap-2">
-                          <div
-                            class="top_matches__innercount-item py-1 px-8 rounded-3 n11-bg"
-                            *ngFor="let tab of tabs"
-                            (click)="subEarningTab = tab"
-                            [class.clickable-active]="subEarningTab === tab"
-                          >
-                            <span >{{tab}}</span>
-                          </div>
+        </div>
+      </ng-container>
 
-                        </div>
-                      </div>
+      <!-- WITHDRAW -->
+      <ng-container *ngIf="subEarningTab==='Withdraw'">
+        <div class="card" *ngFor="let gen of [1,2,3]">
 
-                      <!-- TAB Earnning CONTENT -->
-                      <div class="tab-content">
+          <h5 class="header">Team {{gen}}</h5>
+          <div class="item-row">
+            <span class="label">Amount</span>
+            <span class="info amount">{{ data.withdraw['generation_' + gen].amount | currencyConverter:true }}</span>
+          </div>
 
-                        <!-- Referral Tab -->
-                        <div *ngIf="subEarningTab === 'Referral'" class="section-card">
-                          <h3>Referral Earnings</h3>
-                          <div class="gen-grid">
-                            <div class="gen-card" *ngFor="let percent of quickNav.storeData.store['refDir']?.settings.percent?.referral;let gen=index">
-                              <h4>Generation {{ gen+1 }}</h4>
-                              <p><strong>Users:</strong> {{ data.referral['generation_' + (gen+1)].count }}</p>
-                              <p><strong>Amount:</strong> {{ data.referral['generation_' + (gen+1)].amount |currencyConverter:true }}</p>
-                              <p class="text-deem">
-                                You get %{{percent}} first deposit commission.
-                              </p>
-                            </div>
-                          </div>
-                          <div class="total-line">
-                            <p><b>Total:</b> {{ data.referral.total_earning |currencyConverter:true }}</p>
-                            <small>Last Updated: {{ data.referral.last_updated | date: 'medium' }}</small>
-                          </div>
-                        </div>
+        </div>
+      </ng-container>
 
-                        <!-- Rebate Tab -->
-                        <div *ngIf="subEarningTab === 'Rebate'" class="section-card">
-                          <h3>Rebate Earnings</h3>
-                          <div class="gen-grid">
-                            <div class="gen-card" *ngFor="let percent of quickNav.storeData.store['refDir']?.settings.percent?.rebate;let gen=index">
-                              <h4>Generation {{ gen+1 }}</h4>
-                              <!-- <p><strong>Users:</strong> {{ data.rebate['generation_' + (gen+1)].count }}</p> -->
-                              <p><strong>Amount:</strong> {{ data.rebate['generation_' + (gen+1)].amount |currencyConverter:true }}</p>
-                              <small class="text-deem">
-                                You get %{{percent}} continuous betting bonus.
-                              </small>
-                            </div>
-                          </div>
-                          <div class="total-line">
-                            <p><b>Total:</b> {{ data.rebate.total_earning |currencyConverter:true }}</p>
-                            <small>Last Updated: {{ data.rebate.last_updated | date: 'medium' }}</small>
-                          </div>
-                        </div>
+      <!-- COMMISSION -->
+      <ng-container *ngIf="subEarningTab==='Commission'">
+        <div class="card">
 
-                        <!-- Deposit Tab -->
-                        <div *ngIf="subEarningTab === 'Deposit'" class="section-card">
-                          <h3>Deposit Summary</h3>
-                          <div class="gen-grid">
-                            <div class="gen-card" *ngFor="let gen of [1, 2, 3]">
-                              <h4>Generation {{ gen }}</h4>
-                              <p><b>Deposits:</b>({{ data.deposit['generation_' + gen].amount |currencyConverter:true}})</p>
-                              <p> </p>
-                            </div>
-                          </div>
-                        </div>
+          <p>Total commissions</p>
+          <div class="item-row">
+            <span class="label">Earned</span>
+            <span class="info amount">{{ data.cashed_commissions | currencyConverter:true }}</span>
+          </div>
+          <!-- <p>Uncashed</p>
+          <h3>{{ data.uncashed | currencyConverter:true }}</h3> -->
 
-                        <!-- Withdraw Tab -->
-                        <div *ngIf="subEarningTab === 'Withdraw'" class="section-card">
-                          <h3>Withdraw Summary</h3>
-                          <div class="gen-grid">
-                            <div class="gen-card" *ngFor="let gen of [1, 2, 3]">
-                              <h4>Generation {{ gen }}</h4>
-                              <p><b>Withdrawals:</b> ({{ data.withdraw['generation_' + gen].amount|currencyConverter:true }})</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- Cash Tab -->
-                        <div *ngIf="subEarningTab === 'Commission'" class="section-card cash-summary">
-                          <h3>Commission Summary</h3>
-                          <p><b>Cashed Commissions:</b> {{ data.cashed_commissions |currencyConverter:true }}</p>
-                          <p><b>Uncashed:</b> {{ data.uncashed |currencyConverter:true }}</p>
-                          <p><small>Last Cashed At: {{ data.last_cashed_at | date: 'medium' }}</small></p>
-                        </div>
-
-                      </div>
-                  </div>
-
-                  <div class="sub-users-content" *ngIf="activeTab==='Users'">
-                    <!-- Tab Users Selector -->
-                      <div class="tab-selector mt-6">
-                        <div class="tabs-header d-flex align-items-center gap-2">
-                          <div
-                            class="top_matches__innercount-item py-1 px-8 rounded-3 n11-bg"
-                            *ngFor="let tab of usersTab; let i = index"
-                            (click)="loadUsers(tab,i+1)"
-                            [class.clickable-active]="subUsersTab === tab"
-                          >
-                            <span>{{tab}}</span>
-                          </div>
-
-                        </div>
-                      </div>
-
-                      <!-- TAB Users CONTENT -->
-                      <div class="tab-content">
-                        <div class="container mt-12">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                      <h5 class="fw-bold mb-0">Referral & Rebate Transactions</h5>
-                                      <!-- <span class="badge bg-primary">Total: {{ transactions.length }}</span> -->
-                                    </div>
-
-                                    <div class="table-responsive">
-                                      <table class="table table-hover align-middle">
-                                        <thead class="table-light">
-                                          <tr>
-                                            <!-- <th scope="col">#</th> -->
-                                            <th scope="col">User</th>
-                                            <th scope="col">Type</th>
-                                            <!-- <th scope="col">Gen</th> -->
-                                            <!-- <th scope="col">Base</th> -->
-                                            <th scope="col">Earned</th>
-                                            <!-- <th scope="col">Currency</th> -->
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Date</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr *ngFor="let tx of subUsersContent; let i = index">
-                                            <!-- <th scope="row">{{ i + 1 }}</th> -->
-                                            <td>{{ tx.referred_user }}</td>
-                                            <td>
-                                              <span
-                                                class="badge"
-                                                [ngClass]="{
-                                                  'bg-primary': tx.type === 'referral',
-                                                  'bg-success': tx.type === 'rebate'
-                                                }"
-                                              >
-                                                {{ tx.type | titlecase }}
-                                              </span>
-                                            </td>
-                                            <!-- <td>{{ tx.generation }}</td> -->
-                                            <!-- <td>{{ tx.base_amount }}</td> -->
-                                            <!-- <td>{{ tx.amount | currencyConverter:false:false:5 }}</td> -->
-                                            <td>{{quickNav.storeData.store['wallet']?.init_currency['symbol']}}{{tx.amount|currencyConverter:false:false:5|number:(tx.amount < 0.01 && quickNav.storeData.store['wallet']?.init_currency['symbol'] ==='$'  ? '1.5-5' : '1.2-2')}}</td>
-                                            <!-- <td>{{ tx.currency }}</td> -->
-                                            <td>
-                                              <span
-                                                class="badge"
-                                                [ngClass]="{
-                                                  'bg-success': tx.cashed,
-                                                  'bg-warning text-dark': !tx.cashed
-                                                }"
-                                              >
-                                                {{ tx.cashed ? 'Cashed' : 'Pending' }}
-                                              </span>
-                                            </td>
-                                            <td class="text-small">{{ tx.created_at | date: 'short' }}</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-
-                                      <div *ngIf="!subUsersContent.length" class="empty-state">
-                                        <div class="no-data text-center">
-                                          <img
-                                            [src]="quickNav.emptyDataUrl"
-                                            width="60"
-                                            alt="no data"
-                                          />
-                                          <p>No transactions found.</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    </div>
-
-                        </div>
-                  </div>
-
-              </div>
-
-            </div>
-
-
-
-            </div>
+        </div>
+      </ng-container>
 
     </div>
-  </section>
+
+  </div>
+
+  <!-- USERS -->
+  <div *ngIf="activeTab==='users'" class="content users-section">
+
+    <div class="sub-tabs">
+      <span
+        *ngFor="let tab of usersTab; let i=index"
+        (click)="loadUsers(tab,i+1)"
+        [class.active]="subUsersTab===tab">
+        Team {{i+1}}
+      </span>
+    </div>
+
+    <div class="user-list">
+
+      <div *ngFor="let tx of subUsersContent" class="user-item">
+
+        <div class="user-row top">
+          <span class="name">{{ tx.referred_user }}</span>
+          <span class="type" [class.rebate]="tx.type==='rebate'">
+            {{ tx.type }}
+          </span>
+        </div>
+
+        <div class="user-row middle">
+          <span class="amount">
+            {{tx.amount|currencyConverter:true}}
+          </span>
+
+          <span class="status"
+            [class.done]="tx.cashed">
+            {{ tx.cashed ? 'Done' : 'Pending' }}
+          </span>
+        </div>
+
+        <div class="date">
+          {{ tx.created_at | date:'short' }}
+        </div>
+
+      </div>
+
+      <div *ngIf="!subUsersContent.length" class="empty">
+        No transactions
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 </div>
 
 <app-menu-bottom></app-menu-bottom>

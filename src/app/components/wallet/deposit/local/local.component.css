@@ -1,0 +1,129 @@
+/* Container */
+.network-option {
+  display: block;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.network-option input {
+  display: none;
+}
+
+/* CARD */
+.network-card {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+  border-radius: 14px;
+
+  background: rgba(1, 7, 33, 0.9);
+  border: 1px solid rgba(255,255,255,0.06);
+
+  transition: all 0.25s ease;
+}
+
+/* HOVER */
+.network-option:hover .network-card {
+  transform: translateY(-2px);
+
+  border-color: rgba(255,190,27,0.5);
+
+  box-shadow: 0 6px 20px rgba(255,190,27,0.15);
+}
+
+/* ACTIVE */
+.network-option.active .network-card {
+  border: 1px solid #ffbe1b;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,190,27,0.15),
+    rgba(1,7,33,1)
+  );
+
+  box-shadow:
+    0 0 0 1px rgba(255,190,27,0.4),
+    0 6px 20px rgba(255,190,27,0.2);
+}
+
+/* LEFT */
+.network-card .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.network-card img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* TEXT */
+.network-card .code {
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+}
+
+.network-card .sub {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* ACTIVE TEXT */
+.network-option.active .code {
+  color: #ffbe1b;
+}
+
+/* RADIO */
+.radio-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  border: 2px solid rgba(255,255,255,0.3);
+
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+/* ACTIVE RADIO */
+.network-option.active .radio-dot {
+  border-color: #ffbe1b;
+}
+
+/* INNER DOT */
+.network-option.active .radio-dot::after {
+  content: "";
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+  background: #ffbe1b;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* OPTIONAL LEFT ACCENT BAR */
+.network-option.active .network-card::before {
+  content: "";
+  position: absolute;
+
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+
+  border-radius: 4px;
+  background: #ffbe1b;
+}

@@ -20,7 +20,7 @@ body {
   // display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at top, #0f172a, #02192a);
+  // background: radial-gradient(circle at top, #0f172a, #02192a);
   color: #e5e7eb;
   // font-family: Inter, system-ui, sans-serif;
 }
@@ -62,7 +62,10 @@ button[type="submit"] {
   padding: 14px 18px;
   margin-top: 6px;
 
-  background: linear-gradient(135deg, #045d89, #036496);
+  background: linear-gradient(
+      135deg,
+      #0095FF,
+      #ffbe1b);
   color: #000;
 
   font-size: 1rem;
@@ -73,9 +76,9 @@ button[type="submit"] {
   border-radius: 14px;
   cursor: pointer;
 
-  box-shadow:
-    0 16px 40px rgba(2, 95, 141, .45),
-    inset 0 1px 0 rgba(255,255,255,.25);
+  // box-shadow:
+  //   0 16px 40px rgba(2, 95, 141, .45),
+  //   inset 0 1px 0 rgba(255,255,255,.25);
   filter: brightness(1.05);
 
   transition:
@@ -85,11 +88,11 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover:not(:disabled) {
-  background: linear-gradient(135deg, #036fa6, #025f8d);
+  background: #ffbe1b;
   transform: translateY(-1px);
-  box-shadow:
-    0 16px 40px rgba(2, 95, 141, .45),
-    inset 0 1px 0 rgba(255,255,255,.25);
+  // box-shadow:
+  //   0 16px 40px rgba(2, 95, 141, .45),
+  //   inset 0 1px 0 rgba(255,255,255,.25);
   filter: brightness(1.05);
 }
 
@@ -104,7 +107,7 @@ button[type="submit"]:active:not(:disabled) {
 
 
 button[type="submit"]:disabled {
-  background: linear-gradient(135deg, #374151, #1f2933);
+  background: linear-gradient(135deg, #8e9095, #737577);
   color: #9ca3af;
   cursor: not-allowed;
   box-shadow: none;
@@ -186,9 +189,9 @@ textarea {
 
   // font-size: 13px;
 
-  box-shadow:
-    inset 0 1px 2px rgba(0,0,0,.45),
-    0 4px 8px rgba(0,0,0,.25);
+  // box-shadow:
+  //   inset 0 1px 2px rgba(0,0,0,.45),
+  //   0 4px 8px rgba(0,0,0,.25);
 }
 
 input::placeholder {
@@ -220,7 +223,7 @@ input::placeholder {
 
 /* widget  area */
 .item-widget {
-  background: rgb(5 17 32);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 12px;
 }
 
@@ -251,7 +254,7 @@ input::placeholder {
 .item-card {
   margin-top: 1rem;
   padding: 1rem;
-  background: rgb(5 17 32);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 10px;
 }
 
@@ -260,7 +263,7 @@ input::placeholder {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.6rem 0;
-  border-bottom: 1px dashed #ddd;
+  // border-bottom: 1px dashed #ddd;
 }
 
 .item-row:last-child {

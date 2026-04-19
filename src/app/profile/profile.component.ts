@@ -14,8 +14,11 @@ import { FormHandlerService } from '../reuseables/http-loader/form-handler.servi
 import { ReactiveFormsModule, FormBuilder, Validators , FormsModule} from '@angular/forms';
 
 import { AppDownloadManager } from '../reuseables/services/app-download-manager.service';
+import { AccountSummaryComponent } from "../account-summary/account-summary.component";
 
-import { FlowComponent } from "../flow/flow.component";
+import { TelegramService } from '../reuseables/services/telegram-binder.service';
+import { BindAccountComponent } from "../components/modal/bind-account/bind-account.component";
+
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +26,8 @@ import { FlowComponent } from "../flow/flow.component";
     CommonModule,CurrencyConverterPipe,
     SpinnerComponent,Header2Component,
     FormsModule, ReactiveFormsModule,
-    MenuBottomComponent, FlowComponent
+    MenuBottomComponent, AccountSummaryComponent,
+    BindAccountComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
@@ -36,6 +40,7 @@ export class ProfileComponent {
 
   formHandler = inject(FormHandlerService);
   fb = inject(FormBuilder);
+  telegramService = inject(TelegramService)
 
   form = this.fb.group({
     'old-password': ['', [Validators.required]],
@@ -43,13 +48,15 @@ export class ProfileComponent {
   })
 
   modal:any
+  voucherCount = 3
+  notificationCount=3
 
   ngOnInit(){
-    if (!this.quickNav.storeData.get('profile')) {this.quickNav.reqServerData.get("profile/").subscribe(
-    (res)=>{
-      console.log({res});
+    if (!this.quickNav.storeData.get('profile')) {
+      this.quickNav.reqServerData.get("profile/")
+      .subscribe()
     }
-  )}}
+  }
 
   openModal() {
     const modalEl = document.getElementById('changePassword');

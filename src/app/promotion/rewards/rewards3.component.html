@@ -1,0 +1,103 @@
+<div class="invite-page">
+
+  <!-- SUMMARY -->
+  <div class="summary-card">
+
+    <div class="summary-top">
+      <span class="label">Total Earnings</span>
+      <h2 class="amount">
+        {{walletData.init_currency.symbol}}
+        {{currencyConverter(storeData.store['invite-rewards']?.total_earning)|number:'1.1-1'}}
+      </h2>
+    </div>
+
+    <div class="summary-stats">
+
+      <div class="stat">
+        <span>Level</span>
+        <strong>{{storeData.store['invite-rewards']?.level}}</strong>
+      </div>
+
+      <div class="stat">
+        <span>Invited</span>
+        <strong>{{storeData.store['invite-rewards']?.total_invites}}</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- LEVEL PROGRESS -->
+  <div *ngIf="storeData.store['invite-rewards'] as data" class="levels-section">
+
+    <h4 class="section-title">Invite Progress</h4>
+
+    <div class="level-card"
+      *ngFor="let i of data.invite_levels">
+
+      <!-- TOP -->
+      <div class="level-top">
+        <span>Level {{i.id}}</span>
+        <span>{{i.invites_required}} invites</span>
+        <span class="reward">
+          {{walletData.init_currency.symbol}}{{currencyConverter(i.reward_amount)|number:'1.0-0'}}
+        </span>
+      </div>
+
+      <!-- PROGRESS -->
+      <div class="progress-bar-wrap">
+        <div class="progress-bar"
+          [style.width.%]="getProgress(i)">
+        </div>
+      </div>
+
+      <!-- STATUS -->
+      <div class="level-status">
+
+        <span *ngIf="getEarning(i.id)" class="done">
+          ✓ Completed
+        </span>
+
+        <span *ngIf="!getEarning(i.id)">
+          {{ i.invites_required - (data.total_invites || 0) }} more needed
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- HISTORY -->
+  <div class="history-section">
+
+    <h4 class="section-title">Reward History</h4>
+
+    <div *ngIf="data.earning_history.length; else empty">
+
+      <div class="history-card"
+        *ngFor="let tx of data.earning_history">
+
+        <div class="row">
+          <span>Level {{tx.level}}</span>
+          <span class="amount">{{tx.amount|currencyConverter:true}}</span>
+        </div>
+
+        <div class="row small">
+          <span>{{ tx.granted_at | date:'short' }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <ng-template #empty>
+      <div class="empty">
+        <img [src]="quickNav.emptyDataUrl" width="60">
+        <p>No transactions found</p>
+      </div>
+    </ng-template>
+
+  </div>
+
+</div>

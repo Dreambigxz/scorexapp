@@ -1,0 +1,95 @@
+
+
+/* QR */
+.qr-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.qr-wrapper img {
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* Wallet Address */
+.wallet-address {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #141324;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Minimum transfer css */
+.min-transfer {
+  background: linear-gradient(
+    135deg,
+    rgba(160, 52, 250, 0.12),
+    rgba(25, 21, 47, 0.9)
+  );
+  border: 0.1rem solid rgba(160, 52, 250, 0.25);
+  border-radius: 1rem;
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0.4rem 1rem rgba(160, 52, 250, 0.15);
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.min-label {
+  font-size: 0.9rem;
+  color: #a5a2c6;
+  letter-spacing: 0.05rem;
+}
+
+.min-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #a034fa;
+
+  background: linear-gradient(90deg, #a034fa, #d18bff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.min-value {
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 0.3rem rgba(160, 52, 250, 0.3);
+  }
+  to {
+    text-shadow: 0 0 0.8rem rgba(160, 52, 250, 0.7);
+  }
+}
+
+.copy-btn {
+  background: #a034fa;
+  color: #ffff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Warning */
+.warning-text {
+  font-size: 13px;
+  opacity: 0.6;
+  line-height: 1.4;
+}

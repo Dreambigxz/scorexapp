@@ -18,7 +18,7 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   animation: slideUpFade 0.3s ease-out;
-  background: #050817;
+  background: rgb(1, 7, 33);
   border: 1px solid #0479b4;
 }
 

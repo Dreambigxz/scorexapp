@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { MainComponent  } from "./main/main.component";
 import { BetinfoComponent  } from "./betinfo/betinfo.component";
 import { BethistoryComponent} from "./bethistory/bethistory.component";
-import { WithdrawComponent} from "./wallet/withdraw/withdraw.component";
-import { DepositComponent} from "./wallet/deposit/deposit.component";
+// import { WithdrawComponent} from "./wallet/withdraw/withdraw.component";
+// import { DepositComponent} from "./wallet/deposit/deposit.component";
 import { TransactionComponent} from "./wallet/transaction/transaction.component";
 import { EarningsComponent} from "./promotion/earnings/earnings.component";
 import { UsersComponent} from "./promotion/users/users.component";
@@ -20,6 +20,8 @@ import { ResetComponent} from "./auth/reset/reset.component";
 import {CreditAgentComponent} from './credit-agent/credit-agent.component'
 import {PaymentConfirmationComponent} from './payment-confirmation/payment-confirmation.component'
 import { AgentManagementComponent } from "./admin/agent-management/agent-management.component";
+
+import { WalletComponent } from "./wallet/wallet.component";
 
 import { authGuard } from './reuseables/auth/auth.guard';
 
@@ -52,25 +54,14 @@ export const routes: Routes = [
       canActivate: [authGuard]
     },
 
+    
     {
-      path: 'wallet/withdraw',
-      component: WithdrawComponent,
-      title: 'withdraw',
+      path: 'wallet',
+      component: WalletComponent,
+      title: 'wallet',
       canActivate: [authGuard]
     },
 
-    {
-      path: 'wallet/deposit',
-      component: DepositComponent,
-      title: 'Deposit',
-      canActivate: [authGuard]
-    },
-    {
-      path: 'wallet/records',
-      component: TransactionComponent,
-      title: 'Records',
-      canActivate: [authGuard]
-    },
     {
       path: 'promotions/earnings',
       component: EarningsComponent,

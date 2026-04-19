@@ -50,7 +50,7 @@ export class AuthService {
       email:["", [Validators.required]],
       password:["", [Validators.required, Validators.minLength(6)]],
       confirm_password:["", [Validators.required]],
-      RefCode:["" , [Validators.required]],
+      RefCode:["" , ],
 
     },{
       validators: this.passwordMatchValidator
@@ -187,7 +187,7 @@ export class AuthService {
   }
 
   setRefCode(){
-    let checkUrl = window.location.href.split('affiliate')
+    let checkUrl = window.location.href.split('uplinner')
 
     if (checkUrl[1]) {
       this.RefCode=checkUrl[1].replaceAll('=','')

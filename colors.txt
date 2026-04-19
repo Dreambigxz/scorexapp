@@ -1,37 +1,7 @@
-d97f02
-
-1a1b1f -black fade
-
-272727 - border line
-
-rgba(255,255,255,0.07)
-
-rgba(255,255,355,0.2)
-
-new
-
-deem - #2a3b47
- main - 06131d
-
- secondary -  linear-gradient(135deg, #06131d, #0b2438)
-
-linear-gradient(135deg, #d97f02, #0b2030)
-
-
- secondary-  d97f02
-
-icons - 0095ff
-
-background -  #07141d
-
-NEEW??>><<
-
-main >> 0479b4
-
-bg - rgb(5 17 32)
-linear-gradient(135deg, #403a08, #008ddf)
+sec: #ffbe1b
+main: rgb(1, 7, 33)
 
 linear-gradient(
       135deg,
-      #0479b4,
-      #01131f)
+      #0095FF,
+      #ffbe1b)

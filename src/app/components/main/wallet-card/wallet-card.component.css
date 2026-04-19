@@ -1,0 +1,117 @@
+.wallet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+
+  /* 🔥 FADED BACKGROUND */
+  background: linear-gradient(
+    180deg,
+    rgba(1, 7, 33, 0.95),
+    rgba(1, 7, 33, 1)
+  );
+
+  /* 🔥 LIGHT BORDER */
+  border: 1px solid rgba(255, 190, 27, 0.25);
+
+  /* 🔥 SOFT GLOW EDGE */
+  box-shadow:
+    0 0 0 1px rgba(255, 190, 27, 0.08),
+    0 6px 20px rgba(0, 0, 0, 0.6);
+
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+/* LEFT */
+.top {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
+  .username {
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  .vip {
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(255, 190, 27, 0.15);
+    color: #ffbe1b;
+  }
+}
+
+.balance {
+  background: none;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: absolute;
+  margin-left: 0;
+
+  .amount {
+    font-size: 17px;
+    font-weight: 900;
+    /* left: 0;
+    position: absolute; */
+  }
+
+  .refresh {
+    font-size: 16px;
+    color: #ffbe1b;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  /* 🔥 spin animation */
+  .spin {
+    animation: spin 2.7s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* RIGHT */
+.right {
+  display: flex;
+  gap: 10px;
+
+  .item {
+    text-align: center;
+
+    .icon-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+
+      background: linear-gradient(135deg, #0095FF, #ffbe1b);
+    }
+
+    span {
+      font-size: 12px;
+    }
+
+    small {
+      display: block;
+      font-size: 9px;
+      color: #aaa;
+      margin-top: 2px;
+    }
+  }
+}

@@ -1,0 +1,127 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div  *ngIf="storeData.store['wallet'] as walletData"  class="single-page-area">
+
+    <div class="container-fluid">
+        <div class="item mt-4 container">
+            <div class="single-blog-card">
+                <!-- <div class="card-img"><img src="assets/img/blog/1.png" alt="img"></div> -->
+                <div class="card-details">
+                    <div class="date secure"> TOTAL EARNINGS </div>
+                    <!-- <a class="card-title" href="blog-details.html">The Best MMA Bets of the Week</a> -->
+                    <div class="blog-meta">
+                      <h4><span translate="no" class="amount">{{walletData['init_currency']['symbol']}}{{currencyConverter(storeData.store['invite-rewards']?.total_earning)|number:'1.1-1'}}</span></h4>
+                      <!-- <span class="title"><h6>Level</h6> - </span><span class="amount">{{storeData.store['invite-rewards'].level}}</span> -->
+                    </div>
+
+                    <br>
+
+                    <div class="Statistics space-around mb-12">
+                      <div class=" current-level">
+                            <h6 class="text-end">Current Level</h6>
+                            <h6 translate="no" class="text-green text-warning badge">{{storeData.store['invite-rewards']?.level}}</h6>
+                        </div>
+
+                        <div class="total-invited">
+                              <h6 class="text-end">Total Invited</h6>
+                               <h6 translate="no" class="text-green badge text-deem text-bold">{{storeData.store['invite-rewards']?.total_invites}}</h6>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+          <div *ngIf="storeData.store['invite-rewards'] as data" class="component-wrap mt-4 container">
+              <div class="row">
+                  <div class="col-xl-12">
+                      <!-- Basic -->
+                      <div class="widget-header">
+                          <!-- <h4>Basic Progress Bars</h4> -->
+                      </div>
+                      <div class="widget has-shadow">
+                          <div class="widget-body">
+                            <div *ngFor="let i of storeData.store['invite-rewards']?.invite_levels" class="invite-level">
+                                  <div class="{{ getEarning(i.id) ? 'active' : '' }}">
+                                    <div class="properties">
+                                      <span>
+                                        Level: {{ i.id }}
+                                        <span *ngIf="getEarning(i.id)" class="check-mark">✓</span>
+                                      </span>                                      <span>{{i.invites_required}} Invites</span>
+                                      <span>{{walletData['init_currency']['symbol']}}{{currencyConverter(i.reward_amount) | number:'1.0-0'}}</span>
+                                    </div>
+
+                                    <div class="progress-wrapper">
+                                      <div class="progress mb-1">
+                                        <div class="progress-bar"
+                                             role="progressbar"
+                                             [style.width.%]="getProgress(i)"
+                                             [ngClass]="{
+                                               'completed': getEarning(i.id),
+                                               'in-progress': !getEarning(i.id) && i.id === storeData.store['invite-rewards'].level,
+                                               'locked': !getEarning(i.id) && i.id !== storeData.store['invite-rewards'].level
+                                             }">
+                                        </div>
+                                      </div>
+                                      <div class="invite-needed" *ngIf="!getEarning(i.id)">
+                                        {{ i.invites_required - (storeData.store['invite-rewards']?.total_invites || 0) }} more needed
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- End Basic -->
+
+                  </div>
+
+              </div>
+
+              <div class="shadow-sm border-0">
+                <div class="card-header -light fw-bold">
+                  <h4>Reward History</h4>
+                </div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-dark">
+                    <tr>
+                      <!-- <th scope="col">#</th> -->
+                      <th scope="col">Level</th>
+                      <th scope="col">amount</th>
+                      <th scope="col">date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let tx of data.earning_history; let i = index">
+                      <!-- <th scope="row">{{ i + 1 }}</th> -->
+                      <td>{{ tx.level }}</td>
+
+                      <td>{{ tx.amount|currencyConverter:true }}</td>
+                      <td class="text-small">{{ tx.granted_at | date:'short' }}</td>
+
+                      <!-- <td>{{ tx.base_amount }}</td> -->
+                      <!-- <td>{{ tx.amount | currencyConverter:false:false:5 }}</td> -->
+
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div *ngIf="!data.earning_history.length" class="empty-state">
+                  <div class="no-data text-center">
+                    <img
+                      [src]="quickNav.emptyDataUrl"
+                      width="60"
+                      alt="no data"
+                    />
+                    <p>No transactions found.</p>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+    </div>
+</div>

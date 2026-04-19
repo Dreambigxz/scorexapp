@@ -36,6 +36,9 @@ export class MatchesComponent {
 
   notStarted:any=[]
 
+  marketMode: 'safe' | 'risk' = 'risk';
+
+
   ngOnInit(): void {
     this.getSoccer()
     this.router.events.pipe(filter((event:any) => event instanceof NavigationEnd)).subscribe((event: any) => {
@@ -45,11 +48,18 @@ export class MatchesComponent {
     });
   }
 
+  toggleMarket(e: any) {
+    this.marketMode = e.target.checked ? 'safe' : 'risk';
+  }
+
   getSoccer(){
     if (!localStorage.getItem("token")) {this.router.navigate(['login']); return}
     if (!this.matchService.storeData.get('soccer')) {
       this.matchService.reqServerData.get('soccer/?showSpinner').subscribe({
         next: (res) => {
+
+          console.log({res});
+
           this.setData()}
       });
     }else{this.setData()}

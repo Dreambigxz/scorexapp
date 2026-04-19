@@ -1,0 +1,157 @@
+<div *ngIf="storeData.store['deposit'][0] as deposit" class="invoice-container">
+
+  <!-- 🧾 INVOICE CARD -->
+  <div  class="invoice-card">
+    <span (click)="walletService.cancelPayment('deposit')" class="text-right text-danger">Delete</span>
+    <h5>Deposit Invoice</h5>
+
+    <div class="invoice-row">
+      <span>Amount To Pay</span>
+      <strong>{{deposit.method}}{{deposit.init_amount|number:"1.2-2"}}</strong>
+    </div>
+
+    <div class="invoice-row">
+      <span>You Will Receive</span>
+      <strong>${{deposit.amount}}</strong>
+    </div>
+
+    <div class="invoice-row">
+      <span>Reference</span>
+      <strong>{{deposit.sessionID}}</strong>
+    </div>
+
+    <div class="invoice-row time">
+      <span>Opened</span>
+      <strong>{{deposit.timestamp| date:'dd.MM.yy hh:mm a'}}</strong>
+    </div>
+
+
+    <div [class]="deposit.status" class="status">
+      {{deposit.status|titlecase}} Payment
+    </div>
+
+
+
+  </div>
+
+
+  <div *ngIf="deposit.status==='pending';else awaitingDeposit" class="n-paid">
+    <!-- 🏦 BANK DETAILS -->
+    <div class="bank-card">
+
+      <div class="sub-tabs">
+
+        <div
+          *ngFor="let bank of storeData.store['local_banks']; let i = index"
+          class="sub-tab"
+          [class.active]="activeTab === i"
+          (click)="activeTab = i">
+          {{ bank.bank }} <i class="fa fa-bank"></i>
+        </div>
+
+      </div>
+
+      <!-- <div class="bank-tabs">
+        <button
+          *ngFor="let bank of storeData.store['local_banks']; let i = index"
+          (click)="activeTab = i"
+          [class.active]="activeTab === i">
+
+          {{ bank.bank }}
+        </button>
+      </div> -->
+
+      <div class="bank-body" *ngIf="storeData.store['local_banks']?.length">
+
+    <ng-container *ngFor="let bank of storeData.store['local_banks']; let i = index">
+
+      <div *ngIf="activeTab === i">
+
+        <h5>Bank Transfer Details</h5>
+
+        <div class="bank-row">
+          <span>Bank</span>
+          <strong>{{bank.bank}}</strong>
+        </div>
+
+        <div class="bank-row">
+          <span>Account Name</span>
+          <strong>{{bank.account_holder}}</strong>
+        </div>
+
+        <div class="bank-row">
+          <span>Account Number</span>
+
+          <div class="account-copy">
+            <strong class="account-number">
+              {{ bank.account_number }}
+            </strong>
+
+            <button class="copy-btn"
+                    (click)="copyAccount(bank.account_number)">
+              <i class="fa fa-copy"></i>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="copied" class="copy-success">
+          Account number copied ✔
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </div>
+
+  <div class="important">
+    ⚠ Send exactly ₦{{deposit.init_amount}}
+    Use <strong>{{deposit.sessionID}}</strong> as payment reference.
+  </div>
+    </div>
+
+    <!-- 📤 UPLOAD RECEIPT -->
+    <div class="upload-card">
+      <h5>Upload Payment Receipt</h5>
+
+      <div class="form__group">
+        <input class="form__input" type="file" (change)="onImageSelected($event)" accept="image/*" />
+
+      </div>
+
+      <div class="form__group">
+        <label for="pool1" class="apool__label">SENDERS NAME / ACCOUNT NUMBER</label>
+        <input
+            [(ngModel)]="sendersName"
+            type="text"
+            class="form__input"
+            placeholder="legal name or bank number"
+            >
+            <p class="payment-info">Please provide real informations to enable system fast confirmation.</p>
+      </div>
+
+
+      <button class="apool__btn"
+              [disabled]="!selectedFile||!sendersName"
+              (click)="submitProof('payment_receipt')"
+              type="submit">
+        Submit Receipt
+      </button>
+    </div>
+
+    <!-- 📌 GUIDE -->
+    <div class="guide-card">
+      <h5>How To Complete Payment</h5>
+      <ol>
+        <li>Transfer the exact amount shown above.</li>
+        <li>Use your Session ID as reference.</li>
+        <li>Take a screenshot of your payment receipt.</li>
+        <li>Upload the receipt below.</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <ng-template #awaitingDeposit>
+    </ng-template>
+</div>

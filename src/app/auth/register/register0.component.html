@@ -1,0 +1,138 @@
+<app-spinner></app-spinner>
+
+<div class="page">
+
+
+  <div class="">
+    <div class="logo-wrap">
+      <img src="/assets/images/logo.png" alt="Logo" />
+    </div>
+    <div class="card">
+
+
+      <h1>SMG Betting ⚽</h1>
+      <p class="subtitle">Join us to start winning!</p>
+
+      <div class="field language">
+        <i class="fa fa-language icon"></i>
+        <select class="notranslate trans-select" (change)="quickNav.changeLanguage($event)">
+            <option disabled selected="selected">Select language</option>
+            <option  *ngFor="let lang of quickNav.langKeys" [value]="lang">
+              {{ lang }}
+            </option>
+          </select>
+      </div>
+
+
+      <form [formGroup]="authService.formView.register" (ngSubmit)="authService.onSubmit(authService.formView.register,'register')">
+        <div class="field">
+          <i class="fa fa-user icon"></i>
+          <input  type="text" formControlName="username" placeholder="Username" />
+        </div>
+
+
+        <div class="field">
+          <i class="fa fa-envelope icon"></i>
+          <input  type="email" formControlName="email" placeholder="Email address" />
+        </div>
+
+        <div  class="field">
+          <i class="fa fa-users icon"></i>
+          <input
+            formControlName="RefCode"
+            type="text"
+            placeholder="Invite Code {{authService.RefCode}}"
+            [readonly]="authService.RefCode"
+          />
+          <!-- <input formControlName="RefCode" type="text" formControlName="RefCode" placeholder="Invited by {{authService.invitedBy}} ☑️"  readonly/> -->
+        </div>
+
+
+          <div class="field password-field">
+              <i class="fa fa-lock icon"></i>
+
+          <input
+            [type]="authService.showPassword ? 'text' : 'password'"
+            placeholder="Password"
+            formControlName="password"
+          />
+
+          <button
+            type="button"
+            class="eye-toggle"
+            (click)="authService.togglePassword()"
+            aria-label="Toggle password visibility"
+          >
+            <i class="fa" [ngClass]="authService.showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
+        <div class="error" *ngIf="authService.formView.register.get('password')?.touched
+          && authService.formView.register.get('password')?.errors?.['minlength']">
+          Password must be at least 6 characters
+        </div>
+
+
+        <div class="field password-field confirm">
+            <i class="fa fa-lock icon"></i>
+
+        <input
+          [type]="authService.showPassword ? 'text' : 'password'"
+          placeholder="Confirm Password"
+          formControlName="confirm_password"
+        />
+
+        <button
+          type="button"
+          class="eye-toggle"
+          (click)="authService.togglePassword()"
+          aria-label="Toggle password visibility"
+        >
+          <i class="fa" [ngClass]="authService.showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+        </button>
+        </div>
+        <div class="error" *ngIf="authService.formView.register.errors?.['passwordMismatch']
+          && authService.formView.register.get('confirm_password')?.touched">
+          Passwords do not match
+        </div>
+
+
+
+
+        <!-- <div class="field">
+          <i class="fa fa-futbol"></i>
+          <input type="text" formControlName="league" placeholder="Favourite League (optional)" />
+        </div> -->
+
+
+        <button type="submit" [disabled]="authService.formView.register.invalid">Create Account</button>
+      </form>
+
+      <div class="auth-footer">
+        <!-- <p>
+          New here?
+          <a class="primary-link" routerLink="/register">Create account</a>
+        </p> -->
+
+        <p class="muted">
+          Already playing?
+          <a class="secondary-link" (click)="authService.router.navigate(['/login'])">Login</a>
+        </p>
+      </div>
+
+
+      <!-- <p class="footer">Already playing? <a href="#">Login</a></p> -->
+    </div>
+  </div>
+
+</div>
+
+<a
+  href="https://t.me/smgchannelofficial"
+  target="_blank"
+  class="telegram-float"
+  aria-label="Chat with us on Telegram"
+
+>
+<i class="ti ti-brand-telegram"></i>
+<span>Join Channel</span>
+</a>

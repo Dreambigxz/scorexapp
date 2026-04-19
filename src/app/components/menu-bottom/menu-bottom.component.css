@@ -1,74 +1,114 @@
+:root {
+  --bg: rgb(1, 7, 33);
+  --secondary: #ffbe1b;
+  --text: #94a3b8;
+}
+
+/* NAV CONTAINER */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
 
-  height: 96px;
-  padding-bottom: env(safe-area-inset-bottom);
-
-  background: linear-gradient(180deg, #0d182a, #0d1729);
-  /* border-top: 1px solid rgba(255,255,255,.08); */
+  height: 65px;
+  padding: 6px 8px;
 
   display: flex;
   justify-content: space-around;
   align-items: center;
 
-  z-index: 100;
+  background: rgb(1, 7, 33);
+  border-top: 1px solid rgba(255,255,255,0.08);
+
+  z-index: 1000;
 }
 
-/* ITEM */
+/* ITEM WRAPPER FIX */
+.bottom-nav > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* NAV ITEM */
 .nav-item {
+  width: 100%;
+  max-width: 80px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  gap: 6px;
-  min-width: 64px;
+  gap: 4px;
+  padding: 6px 0;
 
-  color: #9ca3af;
+  border-radius: 12px;
+
+  color: var(--text);
   font-size: 11px;
-  cursor: pointer;
 
-  transition: all .25s ease;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 /* ICON */
 .nav-item i {
-  font-size: 22px;
-
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: all .25s ease;
+  font-size: 18px;
+  transition: 0.25s;
 }
 
 /* LABEL */
 .nav-item span {
-  font-size: 11px;
-  letter-spacing: .2px;
+  font-size: 10px;
+  letter-spacing: 0.3px;
 }
 
-/* ACTIVE */
+/* HOVER */
+.nav-item:hover {
+  color: white;
+}
+
+/* 🔥 ACTIVE STATE */
+.nav-item.active {
+  color: var(--secondary);
+  background: rgba(255,190,27,0.08);
+}
+
+/* ACTIVE ICON */
 .nav-item.active i {
-  color: #0479b4;
-  background: rgba(4,121,180,.14);
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(4,121,180,.35);
+  color: var(--secondary);
+  transform: translateY(-2px);
 }
 
+/* ACTIVE LABEL */
 .nav-item.active span {
-  color: #0479b4;
-  font-weight: 600;
+  color: var(--secondary);
 }
 
-/* TAP FEEDBACK */
-.nav-item:active i {
-  transform: scale(.95);
+/* 🔥 GLOW EFFECT */
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+
+  width: 40px;
+  height: 4px;
+
+  bottom: 4px;
+  border-radius: 10px;
+
+  background: var(--secondary);
+  box-shadow: 0 0 10px rgba(255,190,27,0.6);
+}
+
+/* SMALL SCREEN TIGHTEN */
+@media (max-width: 400px) {
+  .nav-item i {
+    font-size: 16px;
+  }
+
+  .nav-item span {
+    font-size: 9px;
+  }
 }

@@ -1,49 +1,38 @@
+<div class="page-header">
 
+  <!-- LEFT -->
+  <button (click)="goBack()" class="back-btn">
+    <i class="ti ti-arrow-left"></i>
+  </button>
 
-<!-- <app-quick-notifications *ngIf="storeData.get('notification')&&pageName!=='notifications'"></app-quick-notifications> -->
+  <!-- CENTER -->
+  <h5 class="page-title">{{pageName|titlecase}}</h5>
 
-  <div class="title-area  snipcss-84QUn">
+  <!-- RIGHT (OPTIONAL SLOT) -->
+  <div class="header-right">
 
-      <div class="top-header">
-        <a (click)="goBack()" class="btn back-page-btn"><i class="ti ti-arrow-left"></i></a>
+    <!-- BALANCE -->
+    <div *ngIf="storeData.store['wallet'] as walletData" class="balance">
+      {{walletData.init_currency.symbol}}
+      {{walletData.balance.new | currencyConverter | number:"1.2-2"}}
+    </div>
 
-      </div>
-      <div class="main-header space-between">
-        <div class="">
-          <h5  class="ps-4 header-title">{{pageName}}</h5>
-        </div>
+    <!-- HISTORY -->
+    <div
+      *ngIf="['deposit','withdraw'].includes(pageName)"
+      (click)="router.navigate(['wallet','records'])"
+      class="header-link">
+      <i class="ti ti-history"></i>
+    </div>
 
-
-        <div  *ngIf="storeData.store['wallet'] as walletData" class="balance__data text-deem notranslate"><strong>{{walletData.init_currency.symbol}} </strong> <span class="bal___display">{{walletData.balance.new|currencyConverter|number:"1.2-2"}}</span>
-        </div>
-
-        <!-- <br> -->
-      <div class="text-main mt-2" (click)="router.navigate(['wallet','records'])" *ngIf="['deposit', 'withdraw'].includes(pageName)" class="records grid">
-            <p class="text-deem ">history <i class="ti ti-history"></i></p>
-        </div>
-
-        <div class="text-main mt-2" (click)="router.navigate(['/'])" *ngIf="['credit-agent', 'confirm-payment', 'agent-management'].includes(pageName)" class="records grid">
-            <p class="text-deem "><i class="ti ti-home"> </i>Dashboard <i class="ti ti-arrow-up-right"></i></p>
-        </div>
-        <!-- <div class="text-main " (click)="router.navigate(['promotions','rewards'])" *ngIf="['teams'].includes(pageName)" class="records grid">
-            <p class="text-deem"><i class="ti ti-gift"></i>rewards <i class="ti ti-arrow-up-right"></i></p>
-        </div> -->
-        <div class="text-main " (click)="router.navigate(['promotions','earnings'])" *ngIf="['rewards'].includes(pageName)" class="records grid">
-            <p class="text-deem"><i class="ti ti-users"></i>Teams <i class="ti ti-arrow-up-right"></i></p>
-        </div>
-      </div>
-
+    <!-- HOME -->
+    <div
+      *ngIf="['credit-agent','confirm-payment','agent-management'].includes(pageName)"
+      (click)="router.navigate(['/'])"
+      class="header-link">
+      <i class="ti ti-home"></i>
+    </div>
 
   </div>
-<!-- <div style="margin-top:90px" class="">
-
-<div *ngIf="!['Level-1','Level-2','Level-3', 'Inactive', 'rewards', 'Account', 'account','Transactions'].includes(pageName)">
-  <div *ngIf="storeData.store['wallet'] as walletData" class="balance-data  notranslate text-center mt-12 gap-4 space-">
-        <span class="text-deem">Balance:</span>
-        <span class="bal___display">{{walletData.init_currency.symbol}} {{walletData.balance.new|currencyConverter|number:"1.2-2"}} </span>
-        <i (click)="quickNav.reload('main')" class="ti ti-reload text-main"></i>
 
 </div>
-</div>
-
-</div> -->

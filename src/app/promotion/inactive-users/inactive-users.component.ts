@@ -30,7 +30,6 @@ export class InactiveUsersComponent {
 
       if (!this.storeData.get('promotionLevel_'+this.directory)) {
           this.reqServerData.get('promotions/?level='+this.directory).subscribe({next: res => {
-            console.log(res);
             this.subUsersContent=this.storeData.get('promotionLevel_'+this.directory)
 
           }})

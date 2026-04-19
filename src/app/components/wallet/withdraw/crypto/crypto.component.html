@@ -1,0 +1,126 @@
+<section *ngIf="walletService.storeData.store as store">
+
+
+  <div *ngIf="store['wallet']?.['hasPin'];else noPin"  class="hasPin">
+
+    <div *ngIf="!walletService.quickNav.storeData.store['withdraw']?.length;else hasInvoice">
+
+      <div class="network-options">
+        <label *ngFor="let curr of walletService.getVisibleCrptoNetwork([0, 2]);let i=index" class="network-option">
+          <input type="radio" name="network" value="{{curr.code}}"
+                 [(ngModel)]="walletService.selectedCryptoMethod">
+          <span class="custom-radio"></span>
+          {{walletService.cryptos[i].label}}
+          <img class="crypto-img" [src]="walletService.cryptos[i].img" alt="">
+        </label>
+      </div>
+
+      <div *ngIf="store['wallet']?.saved_add&&!walletService.editingAddress;else noSavedAdd;else noSavedAdd" class="mt-5">
+
+        <div *ngIf="store['wallet'].saved_add[0] as add">
+          <div class="qr-wrapper">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data={{add.account_number}}" />
+          </div>
+          <!-- Wallet Address -->
+          <!-- <div  class="wallet-address">
+            <span>{{add.account_number|truncateCenter:16}}</span>
+            <button (click)="walletService.quickNav.copy(add.account_number, 'Address  copied')" class="copy-btn">Copy</button>
+          </div> -->
+        </div>
+
+
+        <div *ngIf="walletService.formView.crypto.withdraw as form">
+          <form [formGroup]="form" (ngSubmit)="walletService.handleSubmit(form, 'create_withdraw')" class="local-acc" >
+            <div class="local-withdraw-form">
+
+                <div class="amount-container form-group">
+                  <div class="apool__group">
+                    <label for="pool1" class="apool__label">Enter amount</label>
+                    <input
+                        formControlName="amount"
+                        [min]="walletService.minimumPayment"
+                        type="number"
+                        class="form__input"
+                        placeholder="{{walletService.selectedData.symbol}}{{walletService.minimumPayment|number:'1.2-2'}}"
+                        >
+                  </div>
+
+                  <div class="trade-properties">
+                    <div class="row-item space-between">
+                      <span class="label">Minimum</span>
+                      <span class="value minimum">{{walletService.selectedData.symbol}}{{walletService.minimumPayment|number:"1.2-2"}}</span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class=" form-group mt-4">
+                  <div class="apool__group">
+                    <label for="pool1" class="apool__label">Receive by</label>
+                    <span (click)="walletService.editingAddress=true" class="text-right">Edit <i class="fa fa-edit"></i></span>
+
+                  <select class="form__input" formControlName="saved_method_id">
+                    <option *ngFor="let add of store['wallet'].saved_add;let i=index">
+                      {{add.account_number|truncateCenter:20}}
+                    </option>
+
+                  </select>
+
+
+                </div>
+                </div>
+
+                <button [disabled]="!form.valid"  class="apool__btn"  type="submit" >Send</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+ </div>
+
+ <ng-template #noPin>
+   <app-create-pin></app-create-pin>
+ </ng-template>
+ <ng-template  #noSavedAdd>
+
+   <div *ngIf="walletService.formView.crypto.payment_info as form" class="mt-4">
+     <form [formGroup]="form" (ngSubmit)="walletService.handleSubmit(form, 'create_withdraw')" class="form form--content crypto-acc" >
+
+       <p *ngIf="!store['wallet']?.saved_add"><strong>Save your payment address!</strong></p>
+       <div *ngIf="store['wallet']?.saved_add" class="">
+         <span (click)='walletService.editingAddress=false' class="text-right text-main"><i class="fa fa-close"></i></span>
+         <p ><strong>Edit payment adddress!</strong></p>
+
+       </div>
+
+
+       <div class="form__group">
+         <input formControlName="account_number"  type="text" class="form__input" placeholder="{{walletService.getCryptoLabel(walletService.selectedCryptoMethod)}} Wallet Address">
+       </div>
+
+       <div class="form__group ">
+         <label for="pool1" class="apool__label">Enter Pin</label>
+         <input
+             formControlName="pin"
+             type="number"
+             class="form__input"
+             placeholder="{{store['wallet']?.hasPin?.length}} digit transaction pin"
+             >
+       </div>
+
+       <button class="form__btn" type="submit" [disabled]="!form.valid">SEND</button>
+
+
+     </form>
+
+   </div>
+
+
+ </ng-template>
+
+ <ng-template #hasInvoice>
+   <app-withdraw-invoice></app-withdraw-invoice>
+ </ng-template>
+
+</section>

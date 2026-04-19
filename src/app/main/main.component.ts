@@ -17,11 +17,12 @@ import { QuickNavService } from '../reuseables/services/quick-nav.service';
 import { TruncateCenterPipe } from '../reuseables/pipes/truncate-center.pipe';
 import { CurrencyConverterPipe } from '../reuseables/pipes/currency-converter.pipe';
 
-import { AppDownloadManager } from '../reuseables/services/app-download-manager.service';
-import { FlowComponent } from "../flow/flow.component";
 import { NotificationModalComponent } from '../shared/notification-modal/notification-modal.component';
 
 import { MatDialog } from '@angular/material/dialog';
+
+import { BindAccountComponent } from "../components/modal/bind-account/bind-account.component";
+import { WalletCardComponent } from "../components/main/wallet-card/wallet-card.component";
 
 @Component({
   selector: 'app-main',
@@ -32,7 +33,8 @@ import { MatDialog } from '@angular/material/dialog';
      CommonModule,
      QuickNotificationsComponent,
      SpinnerComponent,SecuredComponent,
-     TruncateCenterPipe, CurrencyConverterPipe, FlowComponent
+     TruncateCenterPipe, CurrencyConverterPipe,
+     BindAccountComponent,WalletCardComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
@@ -43,7 +45,6 @@ export class MainComponent {
   reqServerData = inject(RequestDataService)
 
   quickNav = inject(QuickNavService)
-  appManager = inject(AppDownloadManager)
 
   match = {
     league: 'Premier League',

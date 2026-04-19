@@ -143,8 +143,6 @@ export class MatchService {
       const match = ns.find(
         (m: any) => m.fixture.fixture.id === element.fixtureID
       );
-      console.log({match});
-
       if (match) {
         match['secured'] = true;
         this.CPG.push(match);
@@ -303,5 +301,21 @@ export class MatchService {
       }
     }
 
+  formatTime(date: Date): string {
+    // console.log({date});
+
+    const options: Intl.DateTimeFormatOptions = {
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    };
+
+    return new Intl.DateTimeFormat('en-US', options)
+      .format(date)
+      .replace(' AM', 'am')
+      .replace(' PM', 'pm');
+    }
 
 }

@@ -45,18 +45,27 @@ export class Header2Component {
     }else if(segments.includes("earnings")){
       this.pageName='teams'
     }else if(segments.includes("records")){
-      this.pageName='History'
+      this.pageName='Transactions'
     }else if (segments.includes('users')&&segments.includes('promotions')) {
       this.pageName='Level-'+segments.pop()
     }
     else if(segments.includes("inactive-users")){
       this.pageName='Inactive'
     }
-    else{
-      this.pageName=segments.pop() || ''
+    else if(segments.includes("my-plan")){
+      this.pageName='Trade'
     }
-     // ?segments.includes("betinfo"): this.pageName=segments.pop() || ''; // 'earnings'
-  }
+    else if(segments.includes("vi")||segments.includes("vi#createvi")){
+      this.pageName='VI Quantitative Trading'
+    }
+    else{
+      this.pageName=segments.pop()?.split("?")[0] || ''
+    }
 
+    this.quickNav.storeData.set("pageName", this.pageName)
+
+    // console.log({"pageName": this.pageName});
+
+  }
 
 }

@@ -1,0 +1,70 @@
+
+
+<div *ngIf="!walletService.quickNav.storeData.store['deposit']?.length;else pendingDeposit">
+  <div class="network-options">
+
+    <label *ngFor="let curr of walletService.getVisibleCurrencies([2])"
+         class="network-option"
+         [class.active]="walletService.selectedLocaLMethod === curr.code">
+
+        <input type="radio"
+               name="network"
+               [value]="curr.code"
+               [(ngModel)]="walletService.selectedLocaLMethod"
+               >
+
+        <div class="network-card">
+          <div class="left">
+            <div *ngIf="['XOF'].includes(curr.code)" class="">
+              <span>🌍</span>
+            </div>
+            <div *ngIf="!['XOF'].includes(curr.code)">
+              <img  [src]="makeFlag(curr.code)" alt="🌍">
+
+            </div>
+            <!-- <ng-template #showFlag>
+              </ng-template> -->
+            <div class="text">
+              <div class="code">{{ curr.code }}</div>
+              <div class="sub">{{ curr.name}} Method</div>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="radio-dot"></div>
+          </div>
+        </div>
+
+      </label>
+
+  </div>
+
+  <div *ngIf="walletService.selectedLocaLMethod" id="local-amount" class=" mt-2">
+
+    <div class="apool__group">
+      <label for="pool1" class="apool__label">Enter amount</label>
+      <input
+          [(ngModel)]="walletService.localAmount"
+          type="number"
+          class="form__input"
+          placeholder="{{walletService.selectedData.symbol}}{{walletService.minimumPayment|number:'1.2-2'}}"
+          >
+    </div>
+
+    <!-- chatgpt style this flex table -->
+    <div class="trade-properties">
+      <div class="row-item space-between">
+        <span class="label">Minimum</span>
+        <span class="value minimum">{{walletService.selectedData.symbol}}{{walletService.minimumPayment|number:"1.2-2"}}</span>
+      </div>
+
+    </div>
+
+    <button (click)="creeateDeposit()" [disabled]="!walletService.localAmount||walletService.localAmount<walletService.minimumPayment"  class="apool__btn"  type="submit" >Send</button>
+
+  </div>
+</div>
+
+<ng-template #pendingDeposit>
+  <app-invoice></app-invoice>
+</ng-template>

@@ -1,6 +1,6 @@
 {
-  "name": "SMG",
-  "short_name": "SMG",
+  "name": "ScoreX",
+  "short_name": "ScoreX",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

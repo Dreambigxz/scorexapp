@@ -59,7 +59,7 @@ export class EarningsComponent {
   tabs = ['Referral', 'Rebate', 'Deposit', 'Withdraw', 'Commission'];
   usersTab = [ "Generation1", "Generation2", "Generation3"]
 
-  activeTab = 'Earnings';
+  activeTab = 'earnings';
   subEarningTab = 'Referral';
   subUsersTab = 'Generation1';
 
@@ -75,6 +75,7 @@ export class EarningsComponent {
   ngOnInit(){
       if (!this.quickNav.storeData.get('refDir')) {this.quickNav.reqServerData.get("promotions/").subscribe(
         (res)=>{
+
           this.makeRefLink()
           this.walletData=this.quickNav.storeData.get('wallet')
         }
@@ -86,12 +87,16 @@ export class EarningsComponent {
 
   MainTablistener(tab:any){
     this.activeTab=tab
-    if (tab==="Users"&&!this.quickNav.storeData.get('promotionLevel_1')) {
+    if (tab==="users"&&!this.quickNav.storeData.get('promotionLevel_1')) {
       this.loadUsers("Generation1")
     }
   }
 
   loadUsers(tab:any, generation:any=null){
+
+    console.log({tab,generation});
+
+
     generation = generation || tab[tab.length-1]
     this.subUsersTab=tab
     if (!this.quickNav.storeData.get('promotionLevel_'+generation)) {
@@ -106,7 +111,7 @@ export class EarningsComponent {
 
   makeRefLink() {
     const RefCode = this.quickNav.storeData.get('refDir')['RefCode'];
-    this.refLink = `${window.location.origin}/register?affiliate=${RefCode}`;
+    this.refLink = `${window.location.origin}/register?uplinner=${RefCode}`;
   }
 
 

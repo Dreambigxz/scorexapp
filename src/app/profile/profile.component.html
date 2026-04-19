@@ -1,231 +1,183 @@
 <app-header2></app-header2>
 <app-spinner></app-spinner>
 
-<!-- <div style="display:none" class="custom-google-select goog-te-combo" id="google_translate_element"></div> -->
+<div *ngIf="quickNav.storeData?.store?.['bindedTg'] !== undefined">
+    <app-bind-account></app-bind-account>
+</div>
 
-<div class="page">
+<section class="page-wrapper">
 
-  <section class="app-container-no-space ">
+  <section class="app-container">
 
-        <div data-v-35a27079 class="header-container header-tier1 snipcss-vKaJz">
-          <div data-v-35a27079 class="header">
-            <!-- <div class="flex language d-flex">
-            </div> -->
-              <div data-v-35a27079 data-op="me-account" class="account-wrap islogin">
-                  <!-- <span data-v-35a27079 class="user avatar">
-                      <div data-v-506e0cfc data-v-35a27079 class="avatar-wrap"><img data-v-506e0cfc src="https://wallpapercave.com/uwp/uwp4624504.png" class="avatar-image"><img data-v-506e0cfc src="https://s.sporty.net/common/avatar_frame/tier_empty.png" class="avatar-frame"></div>
-                  </span> -->
-                  <div data-v-35a27079 class="wording-wrap">
-                      <div data-v-35a27079 class="account">
-                          <div data-v-35a27079 data-op="me_loggedin-phone" class="name fs-exclude">{{quickNav.storeData.store['username']}}</div>
-                      </div><i data-v-35a27079 class="m-icon-arrow1"></i>
-                  </div>
+    <div class="account-page">
 
-                  <div class="badge badge-vip">
-                    VIP - {{ quickNav.storeData.get('wallet')?.vip ?? 0 }}
-                    <!-- {{ quickNav.storeData.get('vip')?.replaceAll("P",'P-') ?? 0 }} -->
-                  </div>
-              </div>
+    <!-- PROFILE -->
+    <div class="profile-card mt-7">
 
-              <!-- <app-flow></app-flow> -->
+      <div class="profile-top">
 
-
-
-              <!-- <div data-v-35a27079 class="balance-wrap">
-                  <div data-v-35a27079 class="">Available Balance</div>
-                  <div *ngIf="quickNav.storeData.store['wallet'] as walletData" data-v-35a27079 data-op="me_balance" class="value"><span data-v-35a27079>{{walletData.balance.new|currencyConverter:true}}</span></div>
-              </div> -->
-
-              <div class="balance-card" *ngIf="quickNav.storeData.store['wallet'] as wallet">
-                <span class="balance-label">Available Balance</span>
-                <span class="balance-value">
-                  {{ wallet.balance?.new | currencyConverter:true }}
-                </span>
-              </div>
-
-              <div data-v-35a27079 class="w-d-wrap">
-                  <div (click)="quickNav.go('wallet/deposit')" data-v-35a27079 data-op="me_deposit" class="deposit"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/deposit.110c0873e3.png" class="w-d-wrap-img"><span data-v-35a27079 data-cms-key="deposit" data-cms-page="wap_me">Deposit</span></div>
-                  <div (click)="quickNav.go('wallet/withdraw')" data-v-35a27079 data-op="me_withdraw" class="withdraw"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/withdrawal.22f45e3534.png" class="w-d-wrap-img"><span data-v-35a27079 data-cms-key="withdraw" data-cms-page="wap_me">Withdraw</span></div>
-              </div>
-
-              <div *ngIf="quickNav.storeData.store['banker']" data-v-35a27079 class="w-d-wrap">
-                <div
-                  (click)="quickNav.openSiteTab('confirm-payment?method=' + quickNav.storeData.store['banker'] + '&page=deposit')"
-                  class="conf-deposit"
-                  ><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/deposit.110c0873e3.png" class="w-d-wrap-img"><span data-v-35a27079 data-cms-key="deposit" data-cms-page="wap_me">Confirm Deposit</span></div>
-                  <div (click)="quickNav.openSiteTab('confirm-payment?method=' + quickNav.storeData.store['banker'] + '&page=withdraw')" data-v-35a27079 data-op="me_withdraw" class="conf-withdraw"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/withdrawal.22f45e3534.png" class="w-d-wrap-img"><span data-v-35a27079 data-cms-key="withdraw" data-cms-page="wap_me">Confirm Withdraw</span></div>
-              </div>
-
-          </div>
-
+        <div class="avatar">
+          <img src="https://cyber.comolho.com/static/img/avatar.png" />
         </div>
 
-        <!-- <div data-v-35a27079 class="transaction-wrap snipcss-2HKYK mb-12">
-          <div (click)="quickNav.go('wallet/records')" data-v-35a27079 data-op="me_transaction" class="transaction-wrap-item transaction"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/transaction.4d2d40c644.svg" class="transaction-wrap-item-img"><span data-v-35a27079 data-cms-key="transactions" data-cms-page="wap_me">Transactions</span></div>
-          <div (click)="quickNav.go('promotions/rewards')" data-v-35a27079 class="transaction-wrap-item gift"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/gift.0c7224b2a3.svg" class="transaction-wrap-item-img"><span data-v-35a27079 data-cms-key="gifts_nums" data-cms-page="wap_me">Rewards</span><span data-v-35a27079 class="small-red-dot"></span></div>
-          <div (click)="quickNav.go('promotions/inactive-users')" data-v-35a27079 data-op="me_sb_bethistory" class="transaction-wrap-item history"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/bet_history.76d3fd43f4.svg" class="transaction-wrap-item-img"><span data-v-35a27079 data-cms-key="sports_bet_history" data-cms-page="wap_me">Inactive Surbordinates</span></div>
+        <div class="profile-info">
+          <h3>{{quickNav.storeData.store['username']}}</h3>
+          <span class="vip">VIP{{quickNav.storeData.store['wallet']?.vip || 0}}</span>
 
-        </div> -->
+          <div class="user-id">
+            ID: {{quickNav.storeData.store['profile']?.id}}
+            <i (click)="quickNav.copy(quickNav.storeData.store['profile']?.id,'ID copied')" class="ti ti-copy"></i>
+          </div>
+        </div>
 
-        <div class="page-wrapper">
-          <div  data-v-35a27079="" class="list-wrap mt-2">
-            <div (click)="quickNav.go('wallet/records')" data-v-35a27079="" class="item">
-              <div data-v-35a27079="" class="image">
-                <i class="ti ti-history"></i>
-              </div>
-              <div data-v-35a27079="" class="title-wrapper" data-cms-key="how_to_play" data-cms-page="wap_me">Transactions</div>
-              <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
-                <i style="font-size:19px" class="ti ti-caret-right"></i>
+      </div>
 
-              </div>
-            </div>
+      <!-- LANGUAGE -->
+      <div class="language-select">
+        <select (change)="quickNav.changeLanguage($event)">
+          <option disabled selected>Language</option>
+          <option *ngFor="let lang of quickNav.langKeys" [value]="lang">
+            {{ lang }}
+          </option>
+        </select>
+      </div>
+
+    </div>
+
+    <app-account-summary></app-account-summary>
+
+    <!-- QUICK ACTIONS -->
+    <div class="actions-grid">
+
+      <!-- <div (click)="quickNav.go('lucky-wheel')" class="action-item">
+        <div class="icon-wrap">
+          <i class="ti ti-ticket"></i>
+          <span class="badge">{{quickNav.storeData.store["available_wheel"]}}</span>
+        </div>
+        <span>Lucky Wheel</span>
+      </div> -->
+
+      <div (click)="quickNav.openTab('https://t.me/customercareservicex')" class="action-item">
+        <i class="ti ti-headset"></i>
+        <span>Support</span>
+      </div>
+
+      <div (click)="quickNav.openTab('https://t.me/scorexofficialchannel')" class="action-item">
+        <i class="ti ti-brand-telegram"></i>
+        <span>Telegram</span>
+      </div>
+
+      <div (click)="openModal()" class="action-item">
+        <i class="ti ti-shield-lock"></i>
+        <span>Security</span>
+      </div>
+
+    </div>
+
+    <!-- MENU -->
+    <div class="menu-list">
+
+      <div (click)="quickNav.go('wallet',{page:'transactions'})" class="menu-item">
+        <div class="menu-left">
+          <i class="ti ti-history"></i>
+          <span>Transaction History</span>
+        </div>
+        <i class="ti ti-chevron-right"></i>
+      </div>
+
+      <div (click)="quickNav.go('notifications')" class="menu-item">
+        <div class="menu-left">
+
+          <div class="icon-wrap">
+            <i class="ti ti-message"></i>
+            <span class="badge" *ngIf="notificationCount > 0">
+              {{quickNav.storeData.store['notification']?.unseen?.length || 0}}
+            </span>
           </div>
 
-          <!-- <div  data-v-35a27079="" class="list-wrap mt-2">
-
-            <div (click)="quickNav.go('promotions/rewards')" data-v-35a27079="" class="item">
-              <div data-v-35a27079="" class="image">
-                <i style="font-size:19px" class="ti ti-gift"></i>
-              </div>
-              <div data-v-35a27079="" class="title-wrapper" data-cms-key="how_to_play" data-cms-page="wap_me">Rewards</div>
-              <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
-                <i class="ti ti-caret-right"></i>
-
-              </div>
-            </div>
-          </div> -->
-
-            <div (click)="quickNav.openTab('https://t.me/Smg_Customer_service')" data-v-35a27079="" class="list-wrap mt-2">
-            <!-- Customer Service -->
-            <div data-v-35a27079="" class="item">
-              <div data-v-35a27079="" class="image image-customer-service">
-                <!-- <i class="ti ti-support"></i> -->
-                <img data-v-35a27079="" src="//s.sporty.net/global/main/brand/sportybet/mobile/images/help_centre.fec603d91a.svg" class="item-img">
-              </div>
-              <div data-v-35a27079="" class="title-wrapper" data-cms-key="customer_service" data-cms-page="common_functions">Suppport</div>
-              <!-- <div data-v-35a27079="" class="info" data-cms-key="24_7_online" data-cms-page="common_functions">Active 24/7 </div> -->
-              <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
-                <i class="ti ti-caret-right"></i>
-              </div>
-            </div>
-            </div>
-
-            <div  data-v-35a27079="" class="list-wrap mt-2">
-
-              <a (click)="openModal()" data-v-35a27079="" class="item">
-                <div data-v-35a27079="" class="image">
-                  <i class="ti ti-key"></i>
-                </div>
-                <div data-v-35a27079="" class="title-wrapper" data-cms-key="notification_center" data-cms-page="wap_me">Reset Password</div>
-                <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
-                  <i class="ti ti-caret-right"></i>
-                </div>
-              </a>
-            </div>
-
-            <!-- <div  data-v-35a27079="" class="list-wrap mt-2">
-              <a (click)="quickNav.go('notifications')" data-v-35a27079="" class="item">
-                <div data-v-35a27079="" class="image">
-                  <i class="ti ti-bell"></i>
-                </div>
-                <span data-v-35a27079="" class="red-dot red-dot-top-right-notification-center"></span>
-                <div data-v-35a27079="" class="title-wrapper" data-cms-key="notification_center" data-cms-page="wap_me">Notifications</div>
-                <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
-                  <i class="ti ti-caret-right"></i>
-                </div>
-              </a>
-            </div> -->
-
-            <div  data-v-35a27079="" class="list-wrap mt-2">
-              <!-- select LANG -->
-              <div data-v-35a27079="" class="item">
-                <div data-v-35a27079="" class="image image-customer-service">
-                  <!-- <i class="ti ti-support"></i> -->
-                  <i class="ti ti-language"></i>
-                </div>
-                <!-- <div data-v-35a27079="" class="title-wrapper" data-cms-key="customer_service" data-cms-page="common_functions">Suppport</div> -->
-                <!-- <div class="custom-google-select title-wrapper" id="google_translate_element"></div> -->
-                <select class="notranslate trans-select" (change)="quickNav.changeLanguage($event)">
-                  <option disabled selected="selected">Select language</option>
-
-                    <option  *ngFor="let lang of quickNav.langKeys" [value]="lang">
-                      {{ lang }}
-                    </option>
-                  </select>
-
-                <div data-v-35a27079="" class="info" data-cms-key="24_7_online" data-cms-page="common_functions"> </div>
-                <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
-                  <i class="ti ti-caret-right"></i>
-                </div>
-              </div>
-            </div>
-
-
-
-          <!-- Download -->
-          <div  data-v-35a27079="" class="list-wrap mt-2">
-            <div (click)="appManager.installApp()" [class.content-disabled]="!quickNav.storeData.store['can_download_app']&&!quickNav.storeData.store['installIOS']" data-v-35a27079="" class="item">
-              <div data-v-35a27079="" class="image">
-                <!-- <img data-v-35a27079="" src="//s.sporty.net/global/main/brand/sportybet/mobile/images/thought.8416226b5e.svg" class="item-img"> -->
-                <i class="ti ti-download"></i>
-              </div>
-              <div data-v-35a27079="" class="title-wrapper" data-cms-key="share_your_thoughts" data-cms-page="wap_me">Download App</div>
-              <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
-                <i class="ti ti-caret-right"></i>
-
-              </div>
-            </div>
-          </div>
-
-            <div  data-v-35a27079="" class="list-wrap mt-2 mb-12">
-              <!-- LOGOUT -->
-              <div (click)="quickNav.authService.logout(false)" data-v-35a27079="" class="item">
-                <div data-v-35a27079="" class="image">
-                  <i class="ti ti-logout"></i>
-                </div>
-                <div data-v-35a27079="" class="title-wrapper" data-cms-key="how_to_play" data-cms-page="wap_me">Sign out</div>
-                <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
-                  <i class="ti ti-caret-right"></i>
-
-                </div>
-              </div>
-            </div>
+          <span>Notifications</span>
 
         </div>
-   </section>
-   </div>
+        <i class="ti ti-chevron-right"></i>
+      </div>
+
+      <div (click)="appManager.installApp()" class="menu-item">
+        <div class="menu-left">
+          <i class="ti ti-download"></i>
+          <span>Get App</span>
+        </div>
+        <i class="ti ti-chevron-right"></i>
+      </div>
+
+    </div>
+
+    <!-- LOGOUT -->
+    <button (click)="quickNav.authService.logout(false)" class="logout-btn">
+      Logout
+    </button>
+
+    <!-- LOGOUT -->
+    <!-- <button (click)="telegramService.connect()" class="logout-btn">
+      Bind Telegram Account
+    </button> -->
+
+  </div>
+ </section>
+ </section>
+
+
+
 
 <app-menu-bottom></app-menu-bottom>
 
 
 <!-- chamge Password modal -->
 
-<div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="changePassword" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title fs-5">Resset Password</h4>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      <div class="deposit__form">
-          <form [formGroup]="form" class="online" (ngSubmit)="onSubmit()">
-              <div class="mb-5 mb-md-6">
-                  <input class=""   placeholder="Old password" type="text" required formControlName="old-password">
-              </div>
-              <div class="mb-5 mb-md-6">
-                  <input class=""   placeholder="New password" type="text" required formControlName="new-password">
-                  <!-- <span></span> -->
-              </div>
+<div class="modal fade crypto-modal" id="changePassword" tabindex="-1">
 
-              <button
-              [class.inactive-btn]="!form.valid"
-              class="cmn-btn px-5 py-3 mb-6 w-100" type="submit">Enter
-            </button>
-          </form>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">🔐 Reset Password</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
-    </div>
 
+      <div class="modal-body">
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <div class="crypto-input">
+            <input
+              class="form__input"
+              type="text"
+              placeholder="Old password"
+              formControlName="old-password"
+            >
+          </div>
+
+          <div class="crypto-input">
+            <input
+              class="form__input"
+              type="text"
+              placeholder="New password"
+              formControlName="new-password"
+            >
+          </div>
+
+          <button
+            class="apool__btn"
+            [disabled]="!form.valid"
+            type="submit"
+          >
+            Update Password
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
   </div>
-</div>
+
 </div>

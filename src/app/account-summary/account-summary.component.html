@@ -1,0 +1,41 @@
+<div class="balance-card trading-card">
+  <div class="top-row">
+    <div class="title">
+      <span class="icon">💳</span>
+      <span>Account Balance</span>
+    </div>
+
+    <div class="amount-row">
+      <span class="amount notranslate">{{quickNav.storeData.store['wallet']?.balance.new|currencyConverter:true}}</span>
+      <!-- <span class="percent">0%</span> -->
+    </div>
+
+    <div  class="actions">
+      <button (click)="quickNav.go('wallet',  {page:'deposit'})" class="deposit hero__btn">Deposit</button>
+      <button (click)="quickNav.go('wallet',  {page:'withdraw'})" class="withdraw hero__btn hero__btn--light">Withdraw</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div *ngIf="quickNav.storeData.store['betDir']?.records as rec" class="bottom-row">
+
+
+    <div class="info">
+      <span class="label">Todays profit</span>
+      <span class="value notranslate "> {{rec.today?.won.amount || 0 | currencyConverter: true}}</span>
+    </div>
+
+    <div class="info">
+      <span class="label">Total profit</span>
+      <span class="value notranslate text-success">{{rec.true?.won.count || 0}} / {{rec.true?.won.amount || 0 | currencyConverter: true}}</span>
+    </div>
+
+    <div class="info">
+      <span class="label">Total lost</span>
+      <span class="value notranslate text-danger">{{rec.false?.won.count || 0}} / {{ rec.loss?.won.amount ||  0 |currencyConverter: true}}</span>
+    </div>
+
+
+  </div>
+</div>

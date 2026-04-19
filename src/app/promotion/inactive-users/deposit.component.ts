@@ -43,7 +43,9 @@ export class DepositComponent {
 
   ngOnInit(){
       this.storeData.store['pageDetails']='wallet'
-      if (!this.storeData.get('deposit')) {this.reqServerData.get('wallet?dir=start_deposit').subscribe(()=>{
+      if (!this.storeData.get('deposit')) {this.reqServerData.get('wallet?dir=start_deposit').subscribe((res)=>{
+        console.log({res});
+
         this.walletService.setPaymentMode("", "", true);
       })}
 

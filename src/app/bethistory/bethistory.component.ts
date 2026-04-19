@@ -190,4 +190,11 @@ export class BethistoryComponent implements OnInit {
 
   }
 
+  match_state(timestamp: string): string {
+    const matchTime = new Date(timestamp).getTime();
+    const now = Date.now();
+
+    return matchTime <= now ? 'LIVE' : 'NS';
+  }
+
 }

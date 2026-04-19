@@ -1,57 +1,51 @@
 <app-spinner></app-spinner>
 
-<div class="page">
+<div class="app-container">
 
+  <div class="login-card">
 
-  <div class="">
-    <div class="logo-wrap">
+    <!-- Logo -->
+    <div class="logo">
       <img src="/assets/images/logo.png" alt="Logo" />
     </div>
-    <div class="card">
 
+    <h1>ScoreX</h1>
+    <p class="subtitle">Reset Password</p>
 
-      <h1>Reset password</h1>
-      <!-- <p class="subtitle">Join us to start winning!</p> -->
+    <!-- Form -->
+    <form [formGroup]="authService.formView.reset"
+      (ngSubmit)="authService.onSubmit(authService.formView.reset,'forgot-password')">
 
-      <div class="field language mt-4">
-        <i class="fa fa-language icon"></i>
-        <select class="notranslate trans-select" (change)="quickNav.changeLanguage($event)">
-            <option disabled selected="selected">Select language</option>
-            <option  *ngFor="let lang of quickNav.langKeys" [value]="lang">
-              {{ lang }}
-            </option>
-          </select>
-      </div>
-
-      <form [formGroup]="authService.formView.reset" (ngSubmit)="authService.onSubmit(authService.formView.reset,'forgot-password')">
-        <div class="field">
-          <i class="fa fa-email"></i>
-          <input  type="email" formControlName="email" placeholder="Email address" />
+      <!-- Username -->
+        <div class="input-box">
+          <input type="email" formControlName="email" required />
+          <label>Email</label>
+          <i class="fa fa-envelope"></i>
         </div>
 
 
 
-        <button type="submit" [disabled]="authService.formView.reset.invalid">Reset</button>
-      </form>
+      <button class="login-btn"
+        type="submit"
+        [disabled]="authService.formView.reset.invalid">
+        Reset
+      </button>
 
-      <div class="auth-footer">
-        <!-- <p>
-          New here?
-          <a class="primary-link" routerLink="/register">Create account</a>
-        </p> -->
+    </form>
 
-        <p (click)="authService.router.navigate(['/login'])" class="muted">
-          Have Account?
-          <a class="secondary-link">Login</a>
-        </p>
+    <div class="links">
+      <span (click)="authService.router.navigate(['/login'])">
+        Login
+      </span>
 
-        <div (click)="authService.router.navigate(['/reset-password'])" class="reset-text mt-12">
-        </div>
-      </div>
-
-
-      <!-- <p class="footer">Already playing? <a href="#">Login</a></p> -->
     </div>
+
   </div>
 
 </div>
+
+<a href="https://t.me/smgchannelofficial"
+  target="_blank"
+  class="telegram-float">
+  <i class="ti ti-brand-telegram"></i>
+</a>

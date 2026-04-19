@@ -1,0 +1,42 @@
+
+<div class="container snipcss-JLy6E">
+  <div class="top-header space-between">
+    <div class="gap-4">
+      <!-- <i (click)="authService.logout(false)" style="color:#d97f02" class="fa fa-sign-out icon-btn"></i> -->
+
+      <span (click)="quickNav.go('notifications')" class="notification-bell icon-btn text-pointer">
+        <!-- <i class="fa fa-inbox q-icon"></i>
+        <span class="badge noti-count">{{storeData.store['notification']?.unseen?.length}}</span> -->
+        <i class="fa fa-bell"></i>
+        <span class="badge" >{{ storeData.store['notification']?.unseen?.length }}</span>
+      </span>
+      <!-- <i class="ti ti-cloud q-icon"></i>
+      v8.5 -->
+
+
+    </div>
+
+
+    <p class="name right-na gap-4">Hi {{storeData.store['username']}}</p>
+
+    <!-- <div (click)="quickNav.go('wallet/deposit')">
+      <i class="ti middle-nav ti-wallet q-icon"></i>
+    </div> -->
+    <div class=" badge-vip">
+      VIP - {{ storeData.get('wallet')?.vip ?? 0 }}
+    </div>
+
+    <div style="display:none" *ngIf="storeData.store['wallet'] as walletData" class="balance-data text-green notranslate">
+        <!-- $<span class="bal___display"></span> -->
+        <!-- <div *ngIf="storeData.store['wallet'] as walletData" class="balance text-green notranslate"> -->
+          {{walletData.init_currency.symbol}}
+          <span class="bal___display">{{walletData.balance.new|currencyConverter|number:"1.2-2"}}</span>
+
+
+    <!-- </div> -->
+      <!-- <span><a href="#"><img src="https://up2client.com/envato/payfast-pwa/main-file/light-mode/assets/svg/notification-icon.svg" alt="notification-icon"></a></span>
+      <span class="dots-icon"><a href="#"><img src="https://up2client.com/envato/payfast-pwa/main-file/light-mode/assets/svg/dots-icon.svg" alt="setting-icon"></a></span> -->
+  </div>
+
+
+  </div>

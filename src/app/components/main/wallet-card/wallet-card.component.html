@@ -1,0 +1,49 @@
+<div *ngIf="quickNav.storeData.store['wallet'] as wallet" class="wallet">
+  <div class="left">
+    <div class="top">
+      <span class="username">{{quickNav.storeData.store['username']}}</span>
+      <span class="vip">VIP{{wallet.vip || 0}}</span>
+    </div>
+
+    <div class="balance">
+      <span class="amount">
+        {{wallet.init_currency.symbol}}{{wallet.balance.new | currencyConverter | number:"1.2-2"}}
+      </span>
+
+      <span
+        class="refresh"
+        [class.spin]="loading"
+        (click)="refresh()"
+      >
+        ⟳
+      </span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div (click)="quickNav.go('wallet',  {page:'deposit'})" class="item">
+      <div class="icon-box">
+        <span>↑</span>
+      </div>
+      <small>Deposit</small>
+    </div>
+    <div (click)="quickNav.go('wallet',  {page:'withdraw'})" class="item">
+      <div class="icon-box">
+        <span>↓</span>
+      </div>
+      <small>Withdraw</small>
+    </div>
+    <div (click)="quickNav.go('promotions/rewards')" class="item">
+      <div class="icon-box">
+        <span>🎁</span>
+      </div>
+      <small>Rewards</small>
+    </div>
+    <div [class.inactive-content]="!quickNav.storeData.get('can_download_app')" (click)="appManager.installApp()" class="item">
+      <div class="icon-box">
+        <span>📥</span>
+      </div>
+      <small>App</small>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="custom-modal" *ngIf="showTelegramModal">
+
+  <div class="modal-overlay" (click)="closeModal()"></div>
+
+  <div class="modal-box">
+
+    <div class="gift-modal" *ngIf="showTelegramModal">
+
+        <div class="overlay"></div>
+
+        <div class="gift-box">
+
+          <!-- ICON -->
+          <div class="gift-icon">🎁</div>
+
+          <!-- TITLE -->
+          <h2>Get</h2>
+
+          <!-- BONUS -->
+          <div class="bonus">${{link_reward}} BONUS</div>
+
+          <p class="desc">
+            Bind your Telegram account and claim your reward instantly.
+          </p>
+
+          <!-- CTA -->
+          <button class="claim-btn" (click)="bindTelegram()">
+            Claim Reward
+          </button>
+
+          <!-- SKIP -->
+          <span class="skip" (click)="closeModal(true)">Maybe later</span>
+
+        </div>
+      </div>
+
+    <button class="close-btn" (click)="closeModal()">✕</button>
+
+  </div>
+</div>
