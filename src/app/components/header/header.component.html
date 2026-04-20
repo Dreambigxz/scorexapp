@@ -25,9 +25,13 @@
       <span>EN</span>
       <span class="arrow">▼</span>
     </div> -->
-    <div class="checkin">
-      <span class="icon">📅</span>
-      <span>Check-in</span>
+    <div (click)="checkIn()" class="checkin">
+      <span class="icon">
+        {{ storeData.store['checked_in'] ? '✅' : '📅' }}
+      </span>
+      <span>
+        {{ storeData.store['checked_in'] ? 'Checked-in' : 'Check-in' }}
+      </span>
     </div>
 
     <div (click)="quickNav.openTab('https://t.me/customercareservicex')" class="support">🎧</div>

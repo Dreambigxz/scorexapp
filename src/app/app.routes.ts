@@ -22,6 +22,7 @@ import {PaymentConfirmationComponent} from './payment-confirmation/payment-confi
 import { AgentManagementComponent } from "./admin/agent-management/agent-management.component";
 
 import { WalletComponent } from "./wallet/wallet.component";
+import { AboutUsComponent } from "./about-us/about-us.component";
 
 import { authGuard } from './reuseables/auth/auth.guard';
 
@@ -54,7 +55,7 @@ export const routes: Routes = [
       canActivate: [authGuard]
     },
 
-    
+
     {
       path: 'wallet',
       component: WalletComponent,
@@ -133,6 +134,12 @@ export const routes: Routes = [
       path: 'reset-password',
       component: ResetComponent,
       title: 'Reset',
+    },
+
+    {
+      path: 'about-us',
+      component: AboutUsComponent,
+      title: 'About us',
     },
 
 ];

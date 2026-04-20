@@ -18,5 +18,20 @@ export class HeaderComponent {
   authService = inject(AuthService)
   quickNav = inject(QuickNavService)
 
+  checkIn(){
+
+    if (!this.storeData.store['checked_in']) {
+      console.log("check  in user");
+
+      this.quickNav.reqServerData.get("main?check_in=check_in")
+      .subscribe((res)=>{
+        console.log({res});
+
+      })
+
+
+    }
+  }
+
 
 }

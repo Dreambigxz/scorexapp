@@ -77,6 +77,14 @@
     <!-- MENU -->
     <div class="menu-list">
 
+      <div (click)="quickNav.go('about-us')" class="menu-item">
+        <div class="menu-left">
+          <i class="fa fa-info"></i>
+          <span>About us</span>
+        </div>
+        <i class="ti ti-chevron-right"></i>
+      </div>
+
       <div (click)="quickNav.go('wallet',{page:'transactions'})" class="menu-item">
         <div class="menu-left">
           <i class="ti ti-history"></i>

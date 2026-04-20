@@ -1,0 +1,91 @@
+.about-page {
+  padding: 14px;
+  color: #fff;
+}
+
+/* HERO */
+.about-hero {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.about-hero h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffbe1b;
+}
+
+.about-hero p {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* CARD */
+.about-card {
+  background: linear-gradient(145deg, rgba(1,7,33,0.95), rgba(1,7,33,0.7));
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* TITLE */
+.about-card h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #0095FF;
+}
+
+/* TEXT */
+.about-card p {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+/* FEATURE LIST */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  font-size: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* HIGHLIGHT */
+.highlight {
+  border: 1px solid rgba(255,190,27,0.3);
+  box-shadow: 0 0 10px rgba(255,190,27,0.15);
+}
+
+/* WHY GRID */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.why-grid span {
+  background: rgba(255,255,255,0.05);
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .about-hero h1 {
+    font-size: 20px;
+  }
+
+  .about-card p {
+    font-size: 11px;
+  }
+}
