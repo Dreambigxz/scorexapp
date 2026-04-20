@@ -199,15 +199,6 @@
 
         </div>
 
-        <div class="mt-9 load-more">
-        <!-- <div class="d-flex space-between mt-6"> -->
-          <!-- <h5>Upcoming  Matches</h5> -->
-          <!-- <span (click)="matchService.loadMore()" class="text-deem">TEST <i class="ti ti-caret-down"></i></span> -->
-          <span *ngIf="!matchService.noMoreData" (click)="matchService.loadMore()" class="text-deem">Load More <i class="ti ti-caret-down"></i></span>
-          <span *ngIf="matchService.noMoreData"  class="text-deem">No Data <i class="ti ti-database-off"></i></span>
-        </div>
-
-
       </div>
       </ng-template>
     </div>
