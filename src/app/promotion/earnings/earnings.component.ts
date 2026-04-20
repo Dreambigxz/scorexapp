@@ -94,8 +94,6 @@ export class EarningsComponent {
 
   loadUsers(tab:any, generation:any=null){
 
-    console.log({tab,generation});
-
 
     generation = generation || tab[tab.length-1]
     this.subUsersTab=tab

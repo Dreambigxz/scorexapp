@@ -39,8 +39,6 @@
             <span class="league">{{ bet.fixture[0].league.name }}</span>
             <div *ngIf="bet.status==='open' && bet.fixture[0].fixture.timestamp | countdown | async;else notStarted">
               <span class="status ns">NS</span>
-
-
             </div>
 
             <ng-template #notStarted>

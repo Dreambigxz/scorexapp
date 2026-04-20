@@ -1,1 +1,85 @@
 
+.wallet-page {
+  padding: 12px;
+  color: #fff;
+}
+
+/* HEADER */
+.section-header h4 {
+  margin: 0;
+}
+
+.section-header span {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* LIST */
+.user-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* CARD */
+.user-card {
+  background: linear-gradient(145deg, rgba(1,7,33,0.95), rgba(1,7,33,0.7));
+  border-radius: 14px;
+  padding: 12px;
+
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* TOP */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* STATUS */
+.status {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.status.success {
+  background: rgba(34,197,94,0.15);
+  color: #22c55e;
+}
+
+.status.pending {
+  background: rgba(239,68,68,0.15);
+  color: #ef4444;
+}
+
+/* MIDDLE */
+.middle {
+  margin: 8px 0;
+}
+
+.amount {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffbe1b;
+}
+
+/* BOTTOM */
+.bottom {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  color: #64748b;
+  padding: 20px;
+}
