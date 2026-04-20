@@ -181,6 +181,9 @@ export class AuthService {
         // login user
         this.login(res.main.token,'login').subscribe(() => {
          const redirectUrl = localStorage['redirectUrl'] || '/account';
+
+         console.log({redirectUrl});
+
          this.router.navigate([redirectUrl]);
          delete localStorage['redirectUrl'];
         });
