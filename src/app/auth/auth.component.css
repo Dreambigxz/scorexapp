@@ -191,44 +191,6 @@ select.notranslate.trans-select {
     display: none;
       /* margin-bottom: 1em; */
   }
-  .telegram-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    background: #0088cc;
-    color: #fff;
-
-    padding: 12px 18px;
-    border-radius: 50px;
-
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-
-    white-space: nowrap;
-    z-index: 9999;
-  }
-
-  /* ICON FIX */
-  .telegram-float i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 36px;
-    height: 36px;
-
-    background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-
-    font-size: 20px;
-    flex-shrink: 0;
-  }
 
   /* select lang */
   /* Select wrapper */
@@ -297,4 +259,40 @@ select.notranslate.trans-select {
   /* Active glow */
   .select-lang select:focus {
     color: var(--secondary);
+  }
+
+  /* FLOAT BUTTON */
+  .telegram-float {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg,#0095FF,#ffbe1b);
+    color: #000;
+
+    font-size: 22px;
+
+    box-shadow: 0 6px 20px rgba(0,149,255,0.3);
+
+    transition: 0.25s;
+  }
+
+  /* HOVER */
+  .telegram-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,149,255,0.5);
+  }
+
+  /* ICON */
+  .telegram-float i {
+    color: #000;
   }
