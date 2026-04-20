@@ -1,0 +1,32 @@
+.item-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: linear-gradient(150deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+
+  border-radius: 10px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.item-row:last-child {
+  border-bottom: none;
+}
+
+.item-row .label {
+  font-size: 0.65rem;
+  color: #666;
+}
+
+.item-row .value {
+  font-weight: 600;
+  text-align: right;
+  word-break: break-all;
+  color: #d8bfed;
+  font-size: 10px;
+}

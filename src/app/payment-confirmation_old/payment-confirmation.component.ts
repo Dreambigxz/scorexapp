@@ -62,7 +62,8 @@ export class PaymentConfirmationComponent {
   currentProof:any
 
   username:any = 'nouser'
-  data:any
+
+  data: any
 
   ngOnInit():void{
 
@@ -80,8 +81,10 @@ export class PaymentConfirmationComponent {
       this.reqServerData.get(postUrl)
       // this.reqServerData.get(`agent-confirmation?method=${method}&page=${req_data}`)
       .subscribe(response => {
-
+            // console.log({response});
             this.data  = response
+
+            // console.log({data:this.data});
 
             this.isLoadingContent = false
             this.directory=response.type
@@ -99,13 +102,12 @@ export class PaymentConfirmationComponent {
       ()=>{
         this.reqServerData.post('agent-confirmation/',{action:status,id:transaction.id})
         .subscribe((response)=>{
-          this.data  = response
-          
+          console.log({response});
           if (response.status==='success') {
             this.isLoadingContent=false;
             transaction.status = status;
-            this.totalAmount-= transaction.init_amount
-            this.totalAmountDollar -= transaction.amount
+            this.totalAmount-= transaction.amount
+            this.totalAmountDollar -= transaction.init_amount
           }
 
 

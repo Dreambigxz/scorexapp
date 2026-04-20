@@ -4,8 +4,9 @@
 <div  class="mt-12 page-wrapper container">
 	<!-- <div *ngIf="quickNav.storeData.store['active_users']" class="mt-12 page-wrapper container"> -->
 
-    <div class="site-data mb-12">
-      <div class="site-info">
+    <div  class="site-data mb-12">
+
+      <div *ngIf="quickNav.storeData.store['is_admin']" class="site-info">
         <div *ngIf="!quickNav.storeData.store['loaded_user']" class="item-card">
           <div class="item-row">
             <span class="label">Total Users</span>
@@ -18,48 +19,43 @@
 
         </div>
       </div>
+
       <div *ngIf="quickNav.storeData.store['loaded_user']&&!loadNewUser"  class="loaded-user">
 
-        <button class="w-50" (click)="loadNewUser=true" type="submit" name="button">
+        <button class="w-0 apool__btn" (click)="loadNewUser=true" type="submit" name="button">
           Load new user
         </button>
-        <div  *ngIf="quickNav.storeData.store['loaded_user'] as user" class="item-card">
-          <div class="item-row">
-            <span class="label">Username</span>
-            <span class="value">{{ user.username }}</span>
+
+        <div *ngIf="quickNav.storeData.store['is_admin']">
+          <div  *ngIf="quickNav.storeData.store['loaded_user'] as user " class="item-card">
+
+            <div class="item-row">
+              <span class="label">Username</span>
+              <span class="value">{{ user.username }}</span>
+            </div>
+            <div class="item-row">
+              <span class="label">Status</span>
+              <span class="value">{{ getStatusSymbol(user.is_active) }}</span>
+            </div>
+            <div class="item-row">
+              <span class="label">Balance</span>
+              <span class="value">${{ user.balance|number:"1.2-2" }}</span>
+            </div>
+            <div class="item-row">
+              <span class="label">Total Deposit</span>
+              <span class="value">${{ user.history.deposit|number:"1.2-2" }}</span>
+            </div>
+            <div class="item-row">
+              <span class="label">Total Withdrawn</span>
+              <span class="value">${{ user.history.withdraw|number:"1.2-2" }}</span>
+            </div>
+            <div class="item-row">
+              <span class="label">Joined</span>
+              <span class="value">{{ user.registered|date:"medium" }}</span>
+            </div>
+
           </div>
-          <div class="item-row">
-            <span class="label">Status</span>
-            <span class="value">{{ getStatusSymbol(user.is_active) }}</span>
-          </div>
-          <div class="item-row">
-            <span class="label">Balance</span>
-            <span class="value">${{ user.balance|number:"1.2-2" }}</span>
-          </div>
-          <div class="item-row">
-            <span class="label">Total Deposit</span>
-            <span class="value">${{ user.history.deposit|number:"1.2-2" }}</span>
-          </div>
-          <div class="item-row">
-            <span class="label">Total Withdrawn</span>
-            <span class="value">${{ user.history.withdraw|number:"1.2-2" }}</span>
-          </div>
-          <div class="item-row">
-            <span class="label">Total Company Game Played</span>
-            <span class="value">{{ user.bet_history.records?.true?.won?.count || 0 }}</span>
-          </div>
-          <div class="item-row">
-            <span class="label">Total Bonus Game Played</span>
-            <span class="value">{{ user.bet_history.records?.bonus?.won?.count || 0 }}</span>
-          </div>
-          <div class="item-row">
-            <span class="label">Total Risk Game Played</span>
-            <span class="value">{{ user.bet_history.records?.false?.won?.count || 0 }}</span>
-          </div>
-          <div class="item-row">
-            <span class="label">Joined</span>
-            <span class="value">{{ user.registered|date:"medium" }}</span>
-          </div>
+
         </div>
 
         <div class="loaded-user-info">
@@ -69,16 +65,16 @@
 
         </div>
 
-        <div  class="load-new-user">
+        <div  class="load-new-user mt-4">
           <p class="text-primary">
             select data to load!
           </p>
 
-          <div class="load-user-form mt-2">
+          <div class="load-user-form">
 
             <!-- <form (ngSubmit)="loadUserData()"> -->
 
-              <select class="mb-3" (change)="changeSelectedData($event)" name="select-user-obj">
+              <select *ngIf="quickNav.storeData.store['is_admin']; else staffOptions" class="mb-3 form__input" (change)="changeSelectedData($event)" name="select-user-obj">
                   <option selected='selected' disabled=true>Select</option>
                   <option value="promotion_info">Load Invites</option>
                   <option data-prompt=amount value="credit_agent">Credit wallet</option>
@@ -89,10 +85,19 @@
                   <option value="unban_user">UnBan User</option>
                 </select>
 
-                <input [(ngModel)]="sendingData" *ngIf="['increase_agent_withdrawal_limit','credit_agent'].includes(selectedData)" type="number" placeholder="amount ">
-                <input [(ngModel)]="sendingData" *ngIf="selectedData==='change_email'" type="text" placeholder="New Email">
-                <div *ngIf="selectedData==='change_password'" class="set-new-pass">
-                  <input [(ngModel)]="sendingData"  type="text" placeholder="New password">
+                <ng-template #staffOptions>
+                  <select  class="mb-3 form__input" (change)="changeSelectedData($event)" name="select-user-obj">
+                      <option selected='selected' disabled=true>Select</option>
+                      <option data-prompt=amount value="credit_agent">Credit wallet</option>
+                      <!-- <option data-prompt="amount" value="increase_agent_withdrawal_limit">Increase withdraw limit</option> -->
+
+                    </select>
+                </ng-template>
+
+                <input class="form__input" [(ngModel)]="sendingData" *ngIf="['increase_agent_withdrawal_limit','credit_agent'].includes(selectedData)" type="number" placeholder="amount ">
+                <input class="form__input" [(ngModel)]="sendingData" *ngIf="selectedData==='change_email'" type="text" placeholder="New Email">
+                <div class="form__input" *ngIf="selectedData==='change_password'" class="set-new-pass">
+                  <input class="form__input" [(ngModel)]="sendingData"  type="text" placeholder="New password">
                   <!-- <button type="button" name="button">Generate password</button> -->
                   <span (click)="sendingData=quickNav.generatePassword(6)" class="gen-pass-btn">Generate</span>
                 </div>
@@ -100,8 +105,8 @@
               <button
               (click)="loadUserData()"
                 type="submit"
-                [disabled]="!selectedData"
-                class="">Submit <i class="ti ti-arrow-right"></i>
+                [disabled]="!selectedData||!sendingData&&this.dataPrompt"
+                class="apool__btn">Submit <i class="ti ti-arrow-right"></i>
               </button>
             <!-- </form> -->
           </div>
@@ -109,27 +114,26 @@
         </div>
 
       </div>
-    </div>
-        <div *ngIf="loadNewUser" class="load-new-user">
+      </div>
+
+        <div *ngIf="loadNewUser" class="load-new-user mt-4">
           <p class="text-warning">
-            Load user you want to manage!
+            Load a user to manage!
           </p>
 
           <div class="load-user-form mt-2">
-
-            <!-- <form (ngSubmit)="handleSubmit()"> -->
-                <input
-                  [(ngModel)]="manageUser"
-                  type="text" name=""
-                  placeholder="Email / username"
-                   >
+            <input
+              [(ngModel)]="manageUser"
+              type="text" name=""
+              placeholder="Email / username"
+              class="form__input"
+               >
               <button
                 type="submit"
                 (click)="getuserInfo()"
                 [disabled]="!manageUser"
-                class="">Submit <i class="ti ti-arrow-right"></i>
+                class="apool__btn mb-6 w-100 mt-4 ">Submit <i class="ti ti-arrow-right"></i>
               </button>
-            <!-- </form> -->
           </div>
 
         </div>

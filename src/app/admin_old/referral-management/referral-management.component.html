@@ -46,7 +46,25 @@
 
   </div>
 
-    
+    <div class="admin-card">
+
+      <h3>Rebate Earnings</h3>
+
+      <table class="admin-table">
+
+      <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
+
+        <td>{{ gen.replace('generation_',' ') }}</td>
+
+      <!-- <td>Count: {{ dashboardData.rebate[gen].count }}</td> -->
+
+        <td> ${{ dashboardData.rebate[gen].amount |number:"1.2-2" }}</td>
+
+        </tr>
+
+      </table>
+
+      </div>
 
     <div class="admin-card">
 

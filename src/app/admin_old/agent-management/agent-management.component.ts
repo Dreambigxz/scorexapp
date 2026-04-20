@@ -38,10 +38,7 @@ export class AgentManagementComponent {
   dataPrompt:any
 
 
-  ngOnInit(){this.quickNav.reqServerData.get("agent-management").subscribe((res)=>{
-    console.log({res});
-
-  })}
+  ngOnInit(){this.quickNav.reqServerData.get("agent-management").subscribe()}
 
   getStatusSymbol(status: any) {
 
@@ -52,13 +49,15 @@ export class AgentManagementComponent {
 
     return makeSymbols[status];
   }
-
+  
   getuserInfo(){
 
-    delete(this.quickNav.storeData.store['loaded_user'])
     this.quickNav.reqServerData.get("agent-management?user="+this.manageUser).subscribe((res)=>{
+      console.log({res});
 
       if (res.main.loaded_user) {
+        console.log({loadNewUser:this.loadNewUser});
+
         this.loadNewUser=false
       }
 
@@ -85,7 +84,7 @@ export class AgentManagementComponent {
       process: this.sendingData,
       user:this.manageUser
     }
-    if (!this.sendingData&&this.dataPrompt)return;
+      if (!this.sendingData&&this.dataPrompt)return;
     this.quickNav.reqServerData.post('agent-management/', this.readyData).subscribe()
   }
 
