@@ -75,6 +75,7 @@ export class EarningsComponent {
   ngOnInit(){
       if (!this.quickNav.storeData.get('refDir')) {this.quickNav.reqServerData.get("promotions/").subscribe(
         (res)=>{
+          console.log({res});
 
           this.makeRefLink()
           this.walletData=this.quickNav.storeData.get('wallet')
@@ -99,11 +100,17 @@ export class EarningsComponent {
     this.subUsersTab=tab
     if (!this.quickNav.storeData.get('promotionLevel_'+generation)) {
           this.quickNav.reqServerData.get('promotions/?level='+generation).subscribe({next: res => {
+
             this.subUsersContent = this.quickNav.storeData.get('promotionLevel_'+generation)
           }})
       }else{
         this.subUsersContent = this.quickNav.storeData.get('promotionLevel_'+generation)
       }
+
+      console.log(
+        this.quickNav.storeData.store
+      );
+
 
   }
 
