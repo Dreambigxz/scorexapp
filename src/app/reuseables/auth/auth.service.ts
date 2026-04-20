@@ -168,7 +168,7 @@ export class AuthService {
     }
   }
 
-  onSubmit(form:any,processor:any){
+  onSubmitOLD(form:any,processor:any){
 
     if (this.RefCode) {
       form.patchValue({ RefCode: this.RefCode });
@@ -191,6 +191,40 @@ export class AuthService {
     });
 
   }
+
+  onSubmit(form:any,processor:any){
+
+    if (this.RefCode) {
+      form.patchValue({ RefCode: this.RefCode });
+     }
+    this.formHandler.submitForm(form,processor, processor+'/?showSpinner',  true, (res) => {
+      if (res.status === 'success') {
+        this.login(res.main.token, 'login').subscribe(() => {
+
+          const redirectUrl = localStorage['redirectUrl'] || '/account';
+
+          try {
+
+            const [path, query] = redirectUrl.split('?');
+
+            if (query) {
+              const queryParams = Object.fromEntries(new URLSearchParams(query));
+              this.router.navigate([path], { queryParams });
+            } else {
+              this.router.navigate([path]);
+            }
+
+          } catch (error) {
+            this.router.navigate(['/account']);
+          }
+
+          delete localStorage['redirectUrl'];
+        });
+      }
+    });
+
+  }
+
 
   setRefCode(){
     let checkUrl = window.location.href.split('uplinner')
