@@ -121,13 +121,13 @@
         </div>
 
         <div class="form__group">
-          <input formControlName="bank"  type="text" class="form__input" placeholder="BANK NAME" [value]="store['wallet']?.saved_add[0].bank.text">
+          <input formControlName="bank"  type="text" class="form__input" placeholder="BANK NAME" [value]="store['wallet']?.saved_add?.[0]?.bank.text">
         </div>
         <div class="form__group">
-          <input formControlName='account_holder'  type="text" class="form__input" placeholder="ACCOUNT NAME" [value]="store['wallet']?.saved_add[0].account_holder">
+          <input formControlName='account_holder'  type="text" class="form__input" placeholder="ACCOUNT NAME" [value]="store['wallet']?.saved_add?.[0]?.account_holder">
         </div>
         <div class="form__group">
-          <input formControlName="account_number"  type="text" class="form__input" placeholder=" ACCOUNT NUMBER" [value]="store['wallet']?.saved_add[0].account_number">
+          <input formControlName="account_number"  type="text" class="form__input" placeholder=" ACCOUNT NUMBER" [value]="store['wallet']?.saved_add?.[0]?.account_number">
         </div>
 
         <div class="form__group ">
