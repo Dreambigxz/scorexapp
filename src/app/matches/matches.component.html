@@ -113,6 +113,18 @@
     </div>
 
     <div *ngIf="marketMode==='safe'">
+      <div class="search-container mb-7 br-12">
+        <input
+          type="text"
+          [(ngModel)]="matchService.searchTerm"
+          (input)="matchService.search()"
+          placeholder="Search by ID, Team, League, or Country"
+        />
+        <!-- <i class="ti ti-search"></i> -->
+
+      </div>
+
+
       <div *ngIf="!matchService.CPG.length;else hasMatches" class="empty-state">
         <div class="no-data text-center">
           <img
@@ -133,7 +145,7 @@
             *ngFor="let i of matches; let in = index"
             >
 
-            <div *ngIf="i.fixture.fixture.timestamp | countdown:0:'upcoming' | async as time"
+            <div *ngIf="i.fixture.fixture.timestamp | countdown:0:'data':'ns' | async as time"
               class="match-container">
               <!-- <div (click)="matchService.quickNav.copy(i.fixtureID)" class="match-id">
                 ID: {{i.fixtureID}} <i class="fa fa-copy"></i>
@@ -154,36 +166,52 @@
                   <!-- <div class="vs">VS</div> -->
                   <div class="vs-badge">VS</div>
 
+
+
+
                   <div class="team">
                     <img [src]="i.fixture.teams.away.logo" />
                     <span>{{ i.fixture.teams.away.name }}</span>
                   </div>
                 </div>
-
-                <div class="time-row">
+                <hr class="sep">
+                <div class="time-row ">
                   <div class="left">
-                    <span class="icon">📅</span>
-                    <span class="text">15/04 18:30</span>
+                    <!-- <span class="icon">📅</span> -->
+                    <span class="text">  {{ (i.fixture.fixture.timestamp | timeFormat:"date")?.replace(', 2026', '') }},   {{ (i.fixture.fixture.timestamp | timeFormat:"time") }}</span>
                   </div>
 
                   <div class="right">
-                    <span class="t">00</span>
-                    <span class="sep">:</span>
-                    <span class="t">05</span>
-                    <span class="sep">:</span>
-                    <span class="t">23</span>
-                  </div>
+                      <span class="t">{{ time?.slice(0,2) }}</span>
+                      <span class="sep">:</span>
+                      <span class="t">{{ time?.slice(2,4) }}</span>
+                      <span class="sep">:</span>
+                      <span class="t">{{ time?.slice(4,6) || 0 }}</span>
+                    </div>
                 </div>
-              </div>
 
+              </div>
             </div>
 
+
           </div>
+
+
         </div>
+
+        <div class="mt-9 load-more">
+        <!-- <div class="d-flex space-between mt-6"> -->
+          <!-- <h5>Upcoming  Matches</h5> -->
+          <!-- <span (click)="matchService.loadMore()" class="text-deem">TEST <i class="ti ti-caret-down"></i></span> -->
+          <span *ngIf="!matchService.noMoreData" (click)="matchService.loadMore()" class="text-deem">Load More <i class="ti ti-caret-down"></i></span>
+          <span *ngIf="matchService.noMoreData"  class="text-deem">No Data <i class="ti ti-database-off"></i></span>
+        </div>
+
 
       </div>
       </ng-template>
     </div>
+
 
 
 
