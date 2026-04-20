@@ -1,0 +1,44 @@
+.carousel {
+  width: 100%;
+  overflow: visible;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  min-width: 80%;
+  height: 180px; /* 👈 fixed height = clean layout */
+
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111;
+
+  flex-shrink: 0;
+  scroll-snap-align: start;
+
+  position: relative;
+}
+
+/* 🔥 THIS IS THE MAGIC */
+.card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover; /* 👈 fills nicely */
+  object-position: center;
+
+  display: block;
+}

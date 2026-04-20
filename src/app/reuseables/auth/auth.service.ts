@@ -180,7 +180,7 @@ export class AuthService {
       if (res.status==='success') {
         // login user
         this.login(res.main.token,'login').subscribe(() => {
-         const redirectUrl = localStorage['redirectUrl'] || '/';
+         const redirectUrl = localStorage['redirectUrl'] || '/account';
          this.router.navigate([redirectUrl]);
          delete localStorage['redirectUrl'];
         });
