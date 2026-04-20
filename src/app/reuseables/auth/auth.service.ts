@@ -174,6 +174,9 @@ export class AuthService {
       form.patchValue({ RefCode: this.RefCode });
      }
     this.formHandler.submitForm(form,processor, processor+'/?showSpinner',  true, (res) => {
+
+      console.log({res});
+
       if (res.status==='success') {
         // login user
         this.login(res.main.token,'login').subscribe(() => {
