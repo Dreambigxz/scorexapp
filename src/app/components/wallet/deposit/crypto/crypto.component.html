@@ -18,9 +18,9 @@
   <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={{payAddress}}" />
 </div>
 
-<div class="min-transfer">
+<div class="min-transfer-">
   <div class="space-between">
-    <span class="min-label">Minimum</span>
+    <span class="min-label">Minimum required</span>
     <strong class="min-value">
       {{walletService.selectedData?.symbol}}
       {{walletService.minimumPayment | number:"1.2-2"}}
