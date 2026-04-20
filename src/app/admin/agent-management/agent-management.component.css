@@ -19,8 +19,8 @@
 }
 
 .item-row .label {
-  font-size: 0.65rem;
-  color: #666;
+  font-size: 0.865rem !important;
+  color: #fff !important;
 }
 
 .item-row .value {
