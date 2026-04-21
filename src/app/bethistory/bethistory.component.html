@@ -36,7 +36,7 @@
 
           <!-- TOP -->
           <div class="bet-top">
-            <span class="league">{{ bet.fixture[0].league.name }}</span>
+            <span class="league">{{ bet.fixture[0].league.name | truncateCenter:9 }}</span>
             <div *ngIf="bet.status==='open' && bet.fixture[0].fixture.timestamp | countdown | async;else notStarted">
               <span class="status ns">NS</span>
             </div>
@@ -49,9 +49,9 @@
 
           <!-- MATCH -->
           <div class="bet-match">
-            <span>{{ bet.fixture[0].teams.home.name }}</span>
+            <span>{{ bet.fixture[0].teams.home.name | truncateCenter:7 }}</span>
             <span class="vs">vs</span>
-            <span>{{ bet.fixture[0].teams.away.name }}</span>
+            <span>{{ bet.fixture[0].teams.away.name | truncateCenter:7 }}</span>
           </div>
 
           <!-- DETAILS -->
