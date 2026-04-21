@@ -5,14 +5,16 @@
     <app-bind-account></app-bind-account>
 </div>
 
+
 <div *ngIf="storeData?.store?.['bindedTg'] === true || storeData?.store?.['forced_close']">
-    <app-bind-account></app-bind-account>
+  <app-join-channel> </app-join-channel>
+
 </div>
 
 
-<ng-template #showTelegramModal>
+<!-- <ng-template #showTelegramModal>
     <app-join-channel> </app-join-channel>
-  </ng-template>
+  </ng-template> -->
 
 <!-- <app-quick-notifications *ngIf="storeData.get('notification')"></app-quick-notifications> -->
 <!-- <app-quick-notifications *ngIf="storeData.get('notification')&&pageName!=='notifications'"></app-quick-notifications> -->
