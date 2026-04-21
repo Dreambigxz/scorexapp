@@ -232,7 +232,6 @@ export class MatchService {
 
       this.reqServerData.post('bet/?showSpinner',{...slipData,processor}).subscribe({
         next:res=>{
-          console.log({res});
 
           if (!trade) {
               this.booking_link = `${window.location.origin}/betinfo/${this.addingFixture.fixtureID}`

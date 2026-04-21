@@ -22,6 +22,7 @@ import { NotificationModalComponent } from '../shared/notification-modal/notific
 import { MatDialog } from '@angular/material/dialog';
 
 import { BindAccountComponent } from "../components/modal/bind-account/bind-account.component";
+import { JoinChannelComponent } from "../components/modal/join-channel/join-channel.component";
 import { WalletCardComponent } from "../components/main/wallet-card/wallet-card.component";
 
 @Component({
@@ -34,7 +35,8 @@ import { WalletCardComponent } from "../components/main/wallet-card/wallet-card.
      QuickNotificationsComponent,
      SpinnerComponent,SecuredComponent,
      TruncateCenterPipe, CurrencyConverterPipe,
-     BindAccountComponent,WalletCardComponent
+     BindAccountComponent,WalletCardComponent,
+     JoinChannelComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'

@@ -17,6 +17,7 @@ export class BindAccountComponent {
   showTelegramModal = false;
   link_reward = 0.50
   forced_close= false
+
   ngOnInit() {
 
 

@@ -1,0 +1,31 @@
+<div class="tg-modal" *ngIf="showTelegramModal">
+
+  <div class="tg-card">
+
+    <!-- CLOSE -->
+    <div class="tg-close" (click)="closeTelegramModal()">✕</div>
+
+    <!-- ICON -->
+    <div class="tg-icon">
+      <i class="ti ti-brand-telegram"></i>
+    </div>
+
+    <!-- CONTENT -->
+    <h3>Join Our Signal Channel</h3>
+    <p>
+      Get real-time signals, updates & winning tips directly on Telegram.
+    </p>
+
+    <!-- BUTTON -->
+    <button class="tg-btn" (click)="joinTelegram()">
+      Join Channel
+    </button>
+
+    <!-- SKIP -->
+    <span class="tg-skip" (click)="closeTelegramModal()">
+      Maybe later
+    </span>
+
+  </div>
+
+</div>

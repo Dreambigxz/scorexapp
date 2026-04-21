@@ -1,19 +1,18 @@
 <app-spinner></app-spinner>
 <app-header></app-header>
 
-<div *ngIf="storeData?.store?.['bindedTg'] !== undefined">
+<div *ngIf="storeData?.store?.['bindedTg'] !== undefined; else showTelegramModal">
     <app-bind-account></app-bind-account>
 </div>
+
+<ng-template #showTelegramModal>
+    <app-join-channel> </app-join-channel>
+  </ng-template>
 
 <!-- <app-quick-notifications *ngIf="storeData.get('notification')"></app-quick-notifications> -->
 <!-- <app-quick-notifications *ngIf="storeData.get('notification')&&pageName!=='notifications'"></app-quick-notifications> -->
 
 <div class="page page-wrapper ">
-
-
-
-
-
 
   <!-- Slider -->
   <section class="app-container">
