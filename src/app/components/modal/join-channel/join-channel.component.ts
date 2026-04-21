@@ -21,7 +21,7 @@ export class JoinChannelComponent {
     if (!joined) {
       setTimeout(() => {
         this.showTelegramModal = true;
-      }, 2500); // slight delay feels premium
+      }, 1500); // slight delay feels premium
     }
   }
 

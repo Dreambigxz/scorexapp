@@ -1,9 +1,14 @@
 <app-spinner></app-spinner>
 <app-header></app-header>
 
-<div *ngIf="storeData?.store?.['bindedTg'] !== undefined; else showTelegramModal">
+<div *ngIf="storeData?.store?.['bindedTg'] !== undefined">
     <app-bind-account></app-bind-account>
 </div>
+
+<div *ngIf="storeData?.store?.['bindedTg'] === true || storeData?.store?.['forced_close']">
+    <app-bind-account></app-bind-account>
+</div>
+
 
 <ng-template #showTelegramModal>
     <app-join-channel> </app-join-channel>
