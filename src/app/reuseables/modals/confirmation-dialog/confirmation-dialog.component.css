@@ -1,5 +1,8 @@
 
+::ng-deep .mat-mdc-dialog-surface{
 
+  background: rgb(1, 7, 33);
+}
 .delete{
   color: var(--bs-danger) !important;
 }
@@ -65,7 +68,7 @@
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
   background: transparent !important;
   /* #07141d !important; /* NEW: bold blue */
-  border: 1px solid #0479b4;
+  border: 1px solid #999;
   color: #ffffff; /* white text */
   transition: background 0.2s, transform 0.15s;
 }
