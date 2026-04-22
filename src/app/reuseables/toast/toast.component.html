@@ -20,7 +20,8 @@
   </div>
 
   <div class="toast-message">
-    {{ data.message }}
+    <!-- {{ data.message }} -->
+    <div class="toast-message" [innerHTML]="data.message.replaceAll('/n','<br>')"></div>
   </div>
 
   <button class="toast-close" (click)="snackBarRef.dismiss()">
