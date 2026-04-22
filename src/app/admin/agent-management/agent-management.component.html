@@ -46,23 +46,32 @@
           <div *ngIf="quickNav.storeData.store['loaded_user'] as user" class="item-card premium-user-card">
 
             <!-- HEADER -->
-            <div class="card-header">
-              <div>
-                <h3>{{ user.username }}</h3>
+            <div class="card-header premium-header">
+              <div class="left">
+                <div class="avatar">
+                  {{ user.username.charAt(0).toUpperCase() }}
+                </div>
 
-                <span class="badge" [ngClass]="user.is_agent ? 'badge-agent' : 'badge-user'">
-                  {{ user.is_agent ? 'Agent' : 'User' }}
-                </span>
+                <div class="user-info">
+                  <h3>{{ user.username }}</h3>
+                  <span class="badge" [ngClass]="user.is_agent ? 'badge-agent' : 'badge-user'">
+                    {{ user.is_agent ? 'Agent' : 'User' }}
+                  </span>
+                </div>
               </div>
 
-              <span class="status" [ngClass]="user.is_active ? 'active' : 'inactive'">
-                {{ user.is_active ? 'Active' : 'Inactive' }}
-              </span>
+              <div class="right">
+                <span class="status" [ngClass]="user.is_active ? 'active' : 'inactive'">
+                  <span class="dot"></span>
+                  {{ user.is_active ? 'Active' : 'Inactive' }}
+                </span>
+              </div>
             </div>
 
-            <!-- USER DATA -->
+            <!-- BODY -->
             <div class="card-body">
 
+              <!-- ACCOUNT -->
               <div class="section-title">Account</div>
 
               <div class="item-row">
@@ -85,13 +94,37 @@
                 <span class="value">{{ user.registered | date:'medium' }}</span>
               </div>
 
-              <!-- AGENT SECTION -->
+              <!-- GAME STATS -->
+              <div class="section-title mt">Game Stats</div>
+
+              <div class="item-row">
+                <span class="label">Company Games</span>
+                <span class="value">
+                  {{ user.bet_history.records?.true?.won?.count || 0 }}
+                </span>
+              </div>
+
+              <!-- <div class="item-row">
+                <span class="label">Bonus Games</span>
+                <span class="value">
+                  {{ user.bet_history.records?.bonus?.won?.count || 0 }}
+                </span>
+              </div> -->
+
+              <div class="item-row">
+                <span class="label">Risk Games</span>
+                <span class="value">
+                  {{ user.bet_history.records?.false?.won?.count || 0 }}
+                </span>
+              </div>
+
+              <!-- AGENT DATA -->
               <ng-container *ngIf="user.is_agent && user.agent_data as agent">
 
-                <div class="section-title mt">Agent Bal</div>
+                <div class="section-title mt">Agent </div>
 
                 <div class="item-row">
-                  <span class="label">Leader Promotion Award</span>
+                  <span class="label">Leader Promotion</span>
                   <span class="value">${{ agent.bal | number:'1.2-2' }}</span>
                 </div>
 
@@ -103,7 +136,7 @@
                 </div>
 
                 <div class="item-row highlight-box">
-                  <span class="label">Remaining Balance</span>
+                  <span class="label">Remaining</span>
                   <span class="value text-success">
                     ${{ (agent.bal - agent.total_withdrawn) | number:'1.2-2' }}
                   </span>
