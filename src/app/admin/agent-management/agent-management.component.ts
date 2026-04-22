@@ -57,7 +57,6 @@ export class AgentManagementComponent {
 
     delete(this.quickNav.storeData.store['loaded_user'])
     this.quickNav.reqServerData.get("agent-management?user="+this.manageUser).subscribe((res)=>{
-
       if (res.main.loaded_user) {
         this.loadNewUser=false
       }
@@ -87,6 +86,7 @@ export class AgentManagementComponent {
     }
     if (!this.sendingData&&this.dataPrompt)return;
     this.quickNav.reqServerData.post('agent-management/', this.readyData).subscribe()
+
   }
 
 }
