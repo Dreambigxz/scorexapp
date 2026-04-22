@@ -67,3 +67,6 @@
   padding: 0;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
+::ng-deep .mat-mdc-dialog-surface{
+  background: rgb(1, 7, 33);
+}
