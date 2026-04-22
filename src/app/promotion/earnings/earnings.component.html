@@ -30,7 +30,7 @@
       </div>
 
       <div class="item">
-        <span>Team Size</span>
+        <span>Total Team Size</span>
         <div class="circle green-border">
           {{ data.active['generation_1'] + data.active['generation_2'] + data.active['generation_3'] }}
           <!-- {{data.total.generation_1 + data.total.generation_2 + data.total.generation_3}} /{{ data.active.generation_1 + data.active.generation_2 + data.active.generation_3 }} -->
@@ -97,11 +97,6 @@
               <span class="info amount">{{ data.referral['generation_' + (i+1)].amount | currencyConverter:true }}</span>
             </div>
           </div>
-          <!-- <p>Active users: {{ data.referral['generation_' + (i+1)].count }}</p>
-          <p class="amount">
-            {{ data.referral['generation_' + (i+1)].amount | currencyConverter:true }}
-          </p> -->
-
         </div>
       </ng-container>
 
@@ -154,8 +149,8 @@
             <span class="label">Earned</span>
             <span class="info amount">{{ data.cashed_commissions | currencyConverter:true }}</span>
           </div>
-          <!-- <p>Uncashed</p>
-          <h3>{{ data.uncashed | currencyConverter:true }}</h3> -->
+          <p>Frozen</p>
+          <h3>{{ data.uncashed | currencyConverter:true }}</h3>
 
         </div>
       </ng-container>

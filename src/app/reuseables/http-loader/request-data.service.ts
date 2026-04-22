@@ -7,7 +7,6 @@ export class RequestDataService {
   // private baseUrl = 'http://127.0.0.1:8000/api'; // Replace with your API endpoint
   private baseUrl = "/api";
 
-// dfg
   constructor(
     private http: HttpClient,
   ) {}
@@ -20,7 +19,5 @@ export class RequestDataService {
   post(endpoint: string, data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/${endpoint}`, data);
   }
-
-
 
 }

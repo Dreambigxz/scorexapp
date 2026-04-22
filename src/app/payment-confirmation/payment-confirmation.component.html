@@ -2,13 +2,31 @@
 <app-header2></app-header2>
 
 
-	<div class="mt-12 container-fluid">
+	<div class="mt-4 container-fluid">
 
 
     <!-- <ng-template > -->
-      <h4 class="title">Amount : {{currencySymbol}}{{totalAmount|number}} ~ <span class="text-info">${{totalAmountDollar|number}}</span></h4>
 
-      <p></p>
+      <div *ngIf="data?.currency==='USD'" class="mb-12">
+
+				<button
+				  type="submit"
+				  (click)="goToWithdrawal('/confirm-payment', { method: 'TRON', page: 'withdraw' })">
+				  View Trx withdrawal
+				</button>
+      </div>
+
+			<div *ngIf="data?.currency==='TRON'" class="mb-12">
+
+				<button
+				  type="submit"
+				  (click)="goToWithdrawal('/confirm-payment', { method: 'USD', page: 'withdraw' })">
+				  View USDT withdrawal
+				</button>
+      </div>
+
+			<h6 class="title text-center">Amount : {{currencySymbol}}{{totalAmount|number}} ~ <span class="text-info">${{totalAmountDollar|number}}</span></h6>
+
       <div *ngIf="directory==='Withdraw'" class="withdraw">
 
 				<!-- <p>Withdraw View </p> -->
@@ -165,34 +183,37 @@
 
 				<hr>
 
-				<h4>📊 Settlement Details</h4>
+				<div *ngIf="!cryptoCoins.includes(data?.currency)" class="settlement-info">
+					<h4>📊 Settlement Details</h4>
 
-				<div class="row">
-					<span>Total Settled:</span>
-					<strong>{{data.symbol}}{{data.total_settled | number:"1.2-2"}}</strong>
+					<div class="row">
+						<span>Total Settled:</span>
+						<strong>{{data.symbol}}{{data.total_settled | number:"1.2-2"}}</strong>
+					</div>
+
+					<div class="row">
+						<span>Agent Balance:</span>
+						<strong>{{data.symbol}}{{data.agent_bal | number :"1.2-2"}}</strong>
+					</div>
+
+					<div class="row">
+						<span>Commission:</span>
+						<strong>{{data.symbol}}{{data.commission | number:'1.2-2'}}</strong>
+					</div>
+
+					<div class="row">
+						<span>Remit:</span>
+						<strong>{{data.symbol}}{{data.remit | number:'1.2-2'}}</strong>
+					</div>
+
+					<div class="row">
+						<span>USD Value:</span>
+						<strong>${{data.usd | number :"1.2-2"}}</strong>
+					</div>
+
+					<hr>
 				</div>
 
-				<div class="row">
-					<span>Agent Balance:</span>
-					<strong>{{data.symbol}}{{data.agent_bal | number :"1.2-2"}}</strong>
-				</div>
-
-				<div class="row">
-					<span>Commission:</span>
-					<strong>{{data.symbol}}{{data.commission | number:'1.2-2'}}</strong>
-				</div>
-
-				<div class="row">
-					<span>Remit:</span>
-					<strong>{{data.symbol}}{{data.remit | number:'1.2-2'}}</strong>
-				</div>
-
-				<div class="row">
-					<span>USD Value:</span>
-					<strong>${{data.usd | number :"1.2-2"}}</strong>
-				</div>
-
-				<hr>
 
 
 		</div>

@@ -20,7 +20,7 @@ import { TruncateCenterPipe } from '../reuseables/pipes/truncate-center.pipe';
   selector: 'app-payment-confirmation',
   imports: [CommonModule,SpinnerComponent,
     Header2Component,MomentAgoPipe,
-    TruncateCenterPipe
+    TruncateCenterPipe, RouterLink
   ],
   templateUrl: './payment-confirmation.component.html',
   styleUrl: './payment-confirmation.component.css'
@@ -63,33 +63,38 @@ export class PaymentConfirmationComponent {
 
   username:any = 'nouser'
   data:any
+  cryptoCoins = ["USD", "TRON"]
 
-  ngOnInit():void{
+  ngOnInit(): void {
 
-    let req_data = this.route.snapshot.queryParamMap.get('page')
-    let method = this.route.snapshot.queryParamMap.get('method')
-    !req_data?req_data='deposit':0;
-    this.isLoadingContent = true
+    this.route.queryParamMap.subscribe(params => {
 
-    let url = 'confirmation'+window.location.search
+      const req_data = params.get('page') || 'deposit';
 
-      let postUrl = `agent-confirmation?method=${method}`
-      if (req_data){
-        postUrl=postUrl+`&page=${req_data}`
+      let method = params.get('method');
+
+      this.isLoadingContent = true;
+
+      let postUrl = `agent-confirmation?method=${method}`;
+
+      if (req_data) {
+        postUrl += `&page=${req_data}`;
       }
+
       this.reqServerData.get(postUrl)
-      // this.reqServerData.get(`agent-confirmation?method=${method}&page=${req_data}`)
-      .subscribe(response => {
+        .subscribe(response => {
 
-            this.data  = response
+          this.data = response;
 
-            this.isLoadingContent = false
-            this.directory=response.type
-            this.transaction=response.table
-            this.currencySymbol=response.symbol
-            this.totalAmount=response.total_amount
-            this.totalAmountDollar=response.total_amount_usd
-      })
+          this.isLoadingContent = false;
+          this.directory = response.type;
+          this.transaction = response.table;
+          this.currencySymbol = response.symbol;
+          this.totalAmount = response.total_amount;
+          this.totalAmountDollar = response.total_amount_usd;
+        });
+
+    });
 
   }
 
@@ -100,7 +105,7 @@ export class PaymentConfirmationComponent {
         this.reqServerData.post('agent-confirmation/',{action:status,id:transaction.id})
         .subscribe((response)=>{
           this.data  = response
-          
+
           if (response.status==='success') {
             this.isLoadingContent=false;
             transaction.status = status;
@@ -147,6 +152,13 @@ export class PaymentConfirmationComponent {
 
   copyContent(text:any,message:any){
     copyContent(this.toast,text,message)
+  }
+
+  goToWithdrawal(url: string, params: any) {
+    this.router.navigate([url], {
+      queryParams: params
+    });
+
   }
 
 }
