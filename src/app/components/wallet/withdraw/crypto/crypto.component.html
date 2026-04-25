@@ -56,12 +56,13 @@
 
                 <div class=" form-group mt-4">
                   <div class="apool__group">
-                    <label for="pool1" class="apool__label">Receive by</label>
+                    <label for="pool1" class="apool__label">Receive by </label>
+                    <br>
                     <span (click)="walletService.editingAddress=true" class="text-right">Edit <i class="fa fa-edit"></i></span>
 
                   <select class="form__input" formControlName="saved_method_id">
                     <option *ngFor="let add of store['wallet'].saved_add;let i=index">
-                      {{add.account_number|truncateCenter:20}}
+                      {{add.account_number|truncateCenter:9:4}}
                     </option>
 
                   </select>

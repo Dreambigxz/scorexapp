@@ -92,3 +92,8 @@
 .bg-dark{
   background-color:#06131d !important;
 }
+
+.text-right{
+  margin-right:  0;
+  text-align: right !important;
+}
